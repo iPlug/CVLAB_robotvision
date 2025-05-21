@@ -1,0 +1,627 @@
+2025-05-08 15:38:55,111 - Model - INFO - PARAMETER ...
+2025-05-08 15:38:55,111 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=50, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:38:55,111 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:38:57,976 - Model - INFO - File loaded.
+2025-05-08 15:38:57,976 - Model - INFO - Load model ...
+2025-05-08 15:38:57,976 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:38:57,980 - Model - INFO - Import module done.
+2025-05-08 15:38:57,998 - Model - INFO - Model loaded.
+2025-05-08 15:38:58,274 - Model - INFO - Model moved to GPU.
+2025-05-08 15:38:58,274 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:42:05,205 - Model - INFO - PARAMETER ...
+2025-05-08 15:42:05,205 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=50, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:42:05,206 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:42:06,005 - Model - INFO - File loaded.
+2025-05-08 15:42:06,005 - Model - INFO - Load model ...
+2025-05-08 15:42:06,005 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:42:06,007 - Model - INFO - Import module done.
+2025-05-08 15:42:06,019 - Model - INFO - Model loaded.
+2025-05-08 15:42:06,125 - Model - INFO - Model moved to GPU.
+2025-05-08 15:42:06,126 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:42:07,041 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:42:07,041 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:42:07,060 - Model - INFO - Building class subspaces...
+2025-05-08 15:43:10,226 - Model - INFO - PARAMETER ...
+2025-05-08 15:43:10,226 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:43:10,226 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:43:11,033 - Model - INFO - File loaded.
+2025-05-08 15:43:11,033 - Model - INFO - Load model ...
+2025-05-08 15:43:11,034 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:43:11,036 - Model - INFO - Import module done.
+2025-05-08 15:43:11,047 - Model - INFO - Model loaded.
+2025-05-08 15:43:11,165 - Model - INFO - Model moved to GPU.
+2025-05-08 15:43:11,166 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:43:12,134 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:43:12,134 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:43:12,148 - Model - INFO - Building class subspaces...
+2025-05-08 15:43:12,894 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:43:12,894 - Model - INFO - Start testing on single file...
+2025-05-08 15:43:24,887 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:43:24,887 - Model - INFO - Testing finished.
+2025-05-08 15:44:06,337 - Model - INFO - PARAMETER ...
+2025-05-08 15:44:06,337 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\1.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:44:06,337 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd
+2025-05-08 15:44:07,417 - Model - INFO - File loaded.
+2025-05-08 15:44:07,418 - Model - INFO - Load model ...
+2025-05-08 15:44:07,418 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:44:07,420 - Model - INFO - Import module done.
+2025-05-08 15:44:07,432 - Model - INFO - Model loaded.
+2025-05-08 15:44:07,537 - Model - INFO - Model moved to GPU.
+2025-05-08 15:44:07,537 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:44:08,447 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:44:08,447 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:44:08,452 - Model - INFO - Building class subspaces...
+2025-05-08 15:44:09,228 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:44:09,228 - Model - INFO - Start testing on single file...
+2025-05-08 15:44:11,010 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd: Class 0 (Class_0)
+2025-05-08 15:44:11,010 - Model - INFO - Testing finished.
+2025-05-08 15:44:17,138 - Model - INFO - PARAMETER ...
+2025-05-08 15:44:17,138 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\2.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:44:17,138 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\2.pcd
+2025-05-08 15:44:17,920 - Model - INFO - File loaded.
+2025-05-08 15:44:17,920 - Model - INFO - Load model ...
+2025-05-08 15:44:17,921 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:44:17,922 - Model - INFO - Import module done.
+2025-05-08 15:44:17,933 - Model - INFO - Model loaded.
+2025-05-08 15:44:18,031 - Model - INFO - Model moved to GPU.
+2025-05-08 15:44:18,031 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:44:18,853 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:44:18,854 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:44:18,856 - Model - INFO - Building class subspaces...
+2025-05-08 15:44:19,596 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:44:19,597 - Model - INFO - Start testing on single file...
+2025-05-08 15:44:21,337 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\2.pcd: Class 0 (Class_0)
+2025-05-08 15:44:21,337 - Model - INFO - Testing finished.
+2025-05-08 15:44:27,674 - Model - INFO - PARAMETER ...
+2025-05-08 15:44:27,674 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\10.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:44:27,675 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\10.pcd
+2025-05-08 15:44:28,451 - Model - INFO - File loaded.
+2025-05-08 15:44:28,451 - Model - INFO - Load model ...
+2025-05-08 15:44:28,452 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:44:28,453 - Model - INFO - Import module done.
+2025-05-08 15:44:28,466 - Model - INFO - Model loaded.
+2025-05-08 15:44:28,563 - Model - INFO - Model moved to GPU.
+2025-05-08 15:44:28,563 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:44:29,402 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:44:29,402 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:44:29,405 - Model - INFO - Building class subspaces...
+2025-05-08 15:44:30,163 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:44:30,163 - Model - INFO - Start testing on single file...
+2025-05-08 15:44:31,883 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\10.pcd: Class 0 (Class_0)
+2025-05-08 15:44:31,883 - Model - INFO - Testing finished.
+2025-05-08 15:48:21,804 - Model - INFO - PARAMETER ...
+2025-05-08 15:48:21,804 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:48:21,804 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 15:48:22,587 - Model - INFO - File loaded.
+2025-05-08 15:48:22,588 - Model - INFO - Load model ...
+2025-05-08 15:48:22,588 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:48:22,589 - Model - INFO - Import module done.
+2025-05-08 15:48:22,600 - Model - INFO - Model loaded.
+2025-05-08 15:48:22,702 - Model - INFO - Model moved to GPU.
+2025-05-08 15:48:22,702 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:48:23,535 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:48:23,535 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:48:23,538 - Model - INFO - Building class subspaces...
+2025-05-08 15:48:24,291 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:48:24,291 - Model - INFO - Start testing on single file...
+2025-05-08 15:48:26,137 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 0 (Class_0)
+2025-05-08 15:48:26,137 - Model - INFO - Testing finished.
+2025-05-08 15:49:47,301 - Model - INFO - PARAMETER ...
+2025-05-08 15:49:47,301 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:49:47,301 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 15:49:48,039 - Model - INFO - File loaded.
+2025-05-08 15:49:48,040 - Model - INFO - Load model ...
+2025-05-08 15:49:48,040 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:49:48,042 - Model - INFO - Import module done.
+2025-05-08 15:49:48,053 - Model - INFO - Model loaded.
+2025-05-08 15:49:48,144 - Model - INFO - Model moved to GPU.
+2025-05-08 15:49:48,146 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:49:48,964 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:49:48,964 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:49:48,967 - Model - INFO - Building class subspaces...
+2025-05-08 15:49:49,727 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:49:49,727 - Model - INFO - Start testing on single file...
+2025-05-08 15:49:51,530 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 0 (Class_0)
+2025-05-08 15:49:51,530 - Model - INFO - Testing finished.
+2025-05-08 15:54:07,252 - Model - INFO - PARAMETER ...
+2025-05-08 15:54:07,253 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:54:07,253 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:54:08,038 - Model - INFO - File loaded.
+2025-05-08 15:54:08,038 - Model - INFO - Load model ...
+2025-05-08 15:54:08,038 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:54:08,040 - Model - INFO - Import module done.
+2025-05-08 15:54:08,052 - Model - INFO - Model loaded.
+2025-05-08 15:54:08,158 - Model - INFO - Model moved to GPU.
+2025-05-08 15:54:08,158 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:54:08,990 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:54:08,990 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:54:08,992 - Model - INFO - Building class subspaces...
+2025-05-08 15:54:09,749 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:54:09,750 - Model - INFO - Start testing on single file...
+2025-05-08 15:54:11,587 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:54:11,587 - Model - INFO - Testing finished.
+2025-05-08 15:55:19,830 - Model - INFO - PARAMETER ...
+2025-05-08 15:55:19,830 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:55:19,830 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:55:31,934 - Model - INFO - File loaded.
+2025-05-08 15:55:31,934 - Model - INFO - Load model ...
+2025-05-08 15:55:31,934 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:55:31,936 - Model - INFO - Import module done.
+2025-05-08 15:55:31,948 - Model - INFO - Model loaded.
+2025-05-08 15:55:32,023 - Model - INFO - Model moved to GPU.
+2025-05-08 15:55:32,023 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:55:32,881 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:55:32,881 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:55:32,884 - Model - INFO - Building class subspaces...
+2025-05-08 15:55:33,625 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:55:33,625 - Model - INFO - Start testing on single file...
+2025-05-08 15:55:35,489 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:55:35,489 - Model - INFO - Testing finished.
+2025-05-08 15:55:54,214 - Model - INFO - PARAMETER ...
+2025-05-08 15:55:54,215 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:55:54,215 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:56:05,554 - Model - INFO - File loaded.
+2025-05-08 15:56:05,554 - Model - INFO - Load model ...
+2025-05-08 15:56:05,555 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:56:05,557 - Model - INFO - Import module done.
+2025-05-08 15:56:05,569 - Model - INFO - Model loaded.
+2025-05-08 15:56:05,659 - Model - INFO - Model moved to GPU.
+2025-05-08 15:56:05,659 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:56:06,521 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:56:06,521 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:56:06,524 - Model - INFO - Building class subspaces...
+2025-05-08 15:56:07,263 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:56:07,263 - Model - INFO - Start testing on single file...
+2025-05-08 15:56:09,090 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:56:09,090 - Model - INFO - Testing finished.
+2025-05-08 15:58:29,436 - Model - INFO - PARAMETER ...
+2025-05-08 15:58:29,436 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:58:29,436 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:58:36,819 - Model - INFO - File loaded.
+2025-05-08 15:58:36,819 - Model - INFO - Load model ...
+2025-05-08 15:58:36,819 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:58:36,821 - Model - INFO - Import module done.
+2025-05-08 15:58:36,834 - Model - INFO - Model loaded.
+2025-05-08 15:58:36,949 - Model - INFO - Model moved to GPU.
+2025-05-08 15:58:36,949 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:58:37,834 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:58:37,835 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:58:37,838 - Model - INFO - Building class subspaces...
+2025-05-08 15:58:38,612 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:58:38,612 - Model - INFO - Start testing on single file...
+2025-05-08 15:58:40,495 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:58:40,496 - Model - INFO - Testing finished.
+2025-05-08 15:58:50,825 - Model - INFO - PARAMETER ...
+2025-05-08 15:58:50,826 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:58:50,826 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:58:55,452 - Model - INFO - File loaded.
+2025-05-08 15:58:55,453 - Model - INFO - Load model ...
+2025-05-08 15:58:55,453 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:58:55,455 - Model - INFO - Import module done.
+2025-05-08 15:58:55,467 - Model - INFO - Model loaded.
+2025-05-08 15:58:55,556 - Model - INFO - Model moved to GPU.
+2025-05-08 15:58:55,557 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:58:56,446 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:58:56,447 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:58:56,449 - Model - INFO - Building class subspaces...
+2025-05-08 15:58:57,195 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:58:57,196 - Model - INFO - Start testing on single file...
+2025-05-08 15:58:59,067 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:58:59,067 - Model - INFO - Testing finished.
+2025-05-08 15:59:02,466 - Model - INFO - PARAMETER ...
+2025-05-08 15:59:02,466 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:59:02,467 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:59:06,093 - Model - INFO - File loaded.
+2025-05-08 15:59:06,093 - Model - INFO - Load model ...
+2025-05-08 15:59:06,093 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:59:06,095 - Model - INFO - Import module done.
+2025-05-08 15:59:06,106 - Model - INFO - Model loaded.
+2025-05-08 15:59:06,174 - Model - INFO - Model moved to GPU.
+2025-05-08 15:59:06,174 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:59:07,025 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:59:07,025 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:59:07,028 - Model - INFO - Building class subspaces...
+2025-05-08 15:59:07,769 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:59:07,769 - Model - INFO - Start testing on single file...
+2025-05-08 15:59:09,475 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:59:09,475 - Model - INFO - Testing finished.
+2025-05-08 15:59:15,698 - Model - INFO - PARAMETER ...
+2025-05-08 15:59:15,698 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:59:15,699 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:59:19,596 - Model - INFO - File loaded.
+2025-05-08 15:59:19,597 - Model - INFO - Load model ...
+2025-05-08 15:59:19,597 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:59:19,599 - Model - INFO - Import module done.
+2025-05-08 15:59:19,610 - Model - INFO - Model loaded.
+2025-05-08 15:59:19,692 - Model - INFO - Model moved to GPU.
+2025-05-08 15:59:19,692 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:59:20,600 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:59:20,601 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:59:20,604 - Model - INFO - Building class subspaces...
+2025-05-08 15:59:21,353 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:59:21,354 - Model - INFO - Start testing on single file...
+2025-05-08 15:59:23,158 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:59:23,158 - Model - INFO - Testing finished.
+2025-05-08 15:59:34,269 - Model - INFO - PARAMETER ...
+2025-05-08 15:59:34,269 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 15:59:34,269 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 15:59:44,693 - Model - INFO - File loaded.
+2025-05-08 15:59:44,693 - Model - INFO - Load model ...
+2025-05-08 15:59:44,694 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 15:59:44,696 - Model - INFO - Import module done.
+2025-05-08 15:59:44,707 - Model - INFO - Model loaded.
+2025-05-08 15:59:44,827 - Model - INFO - Model moved to GPU.
+2025-05-08 15:59:44,827 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 15:59:45,684 - Model - INFO - Checkpoint loaded.
+2025-05-08 15:59:45,684 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 15:59:45,687 - Model - INFO - Building class subspaces...
+2025-05-08 15:59:46,401 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 15:59:46,401 - Model - INFO - Start testing on single file...
+2025-05-08 15:59:48,122 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 15:59:48,122 - Model - INFO - Testing finished.
+2025-05-08 16:01:00,709 - Model - INFO - PARAMETER ...
+2025-05-08 16:01:00,709 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:01:00,709 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:01:14,370 - Model - INFO - File loaded.
+2025-05-08 16:01:14,370 - Model - INFO - Load model ...
+2025-05-08 16:01:14,370 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:01:14,372 - Model - INFO - Import module done.
+2025-05-08 16:01:14,384 - Model - INFO - Model loaded.
+2025-05-08 16:01:14,473 - Model - INFO - Model moved to GPU.
+2025-05-08 16:01:14,473 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:01:15,380 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:01:15,380 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:01:15,383 - Model - INFO - Building class subspaces...
+2025-05-08 16:01:16,121 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:01:16,122 - Model - INFO - Start testing on single file...
+2025-05-08 16:01:17,894 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 16:01:17,894 - Model - INFO - Testing finished.
+2025-05-08 16:01:57,870 - Model - INFO - PARAMETER ...
+2025-05-08 16:01:57,870 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:01:57,870 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:02:09,454 - Model - INFO - File loaded.
+2025-05-08 16:02:09,454 - Model - INFO - Load model ...
+2025-05-08 16:02:09,455 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:02:09,457 - Model - INFO - Import module done.
+2025-05-08 16:02:09,468 - Model - INFO - Model loaded.
+2025-05-08 16:02:09,544 - Model - INFO - Model moved to GPU.
+2025-05-08 16:02:09,544 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:02:10,420 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:02:10,420 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:02:10,422 - Model - INFO - Building class subspaces...
+2025-05-08 16:02:11,160 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:02:11,160 - Model - INFO - Start testing on single file...
+2025-05-08 16:02:12,981 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 16:02:12,981 - Model - INFO - Testing finished.
+2025-05-08 16:03:46,576 - Model - INFO - PARAMETER ...
+2025-05-08 16:03:46,576 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:03:46,576 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:04:43,945 - Model - INFO - File loaded.
+2025-05-08 16:04:43,945 - Model - INFO - Load model ...
+2025-05-08 16:04:43,946 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:04:43,948 - Model - INFO - Import module done.
+2025-05-08 16:04:43,959 - Model - INFO - Model loaded.
+2025-05-08 16:04:44,051 - Model - INFO - Model moved to GPU.
+2025-05-08 16:04:44,051 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:04:44,900 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:04:44,900 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:04:44,903 - Model - INFO - Building class subspaces...
+2025-05-08 16:04:45,628 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:04:45,628 - Model - INFO - Start testing on single file...
+2025-05-08 16:04:47,368 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 16:04:47,368 - Model - INFO - Testing finished.
+2025-05-08 16:05:17,588 - Model - INFO - PARAMETER ...
+2025-05-08 16:05:17,588 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:05:17,588 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:05:29,222 - Model - INFO - File loaded.
+2025-05-08 16:05:29,222 - Model - INFO - Load model ...
+2025-05-08 16:05:29,222 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:05:29,224 - Model - INFO - Import module done.
+2025-05-08 16:05:29,235 - Model - INFO - Model loaded.
+2025-05-08 16:05:29,354 - Model - INFO - Model moved to GPU.
+2025-05-08 16:05:29,354 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:05:30,231 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:05:30,231 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:05:30,234 - Model - INFO - Building class subspaces...
+2025-05-08 16:05:30,982 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:05:30,982 - Model - INFO - Start testing on single file...
+2025-05-08 16:05:32,781 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 16:05:32,781 - Model - INFO - Testing finished.
+2025-05-08 16:06:07,137 - Model - INFO - PARAMETER ...
+2025-05-08 16:06:07,137 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:06:07,137 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:07:23,499 - Model - INFO - PARAMETER ...
+2025-05-08 16:07:23,499 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:07:23,499 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:08:02,659 - Model - INFO - File loaded.
+2025-05-08 16:08:02,659 - Model - INFO - Load model ...
+2025-05-08 16:08:02,660 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:08:02,662 - Model - INFO - Import module done.
+2025-05-08 16:08:02,674 - Model - INFO - Model loaded.
+2025-05-08 16:08:02,769 - Model - INFO - Model moved to GPU.
+2025-05-08 16:08:02,769 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:08:03,621 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:08:03,622 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:08:03,624 - Model - INFO - Building class subspaces...
+2025-05-08 16:08:04,365 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:08:04,365 - Model - INFO - Start testing on single file...
+2025-05-08 16:08:06,239 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 0 (Class_0)
+2025-05-08 16:08:06,239 - Model - INFO - Testing finished.
+2025-05-08 16:19:09,454 - Model - INFO - PARAMETER ...
+2025-05-08 16:19:09,455 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:19:09,455 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd
+2025-05-08 16:19:17,720 - Model - INFO - File loaded.
+2025-05-08 16:19:17,721 - Model - INFO - Load model ...
+2025-05-08 16:19:17,721 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:19:17,724 - Model - INFO - Import module done.
+2025-05-08 16:19:17,735 - Model - INFO - Model loaded.
+2025-05-08 16:19:17,821 - Model - INFO - Model moved to GPU.
+2025-05-08 16:19:17,821 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:19:18,776 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:19:18,776 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:19:18,780 - Model - INFO - Building class subspaces...
+2025-05-08 16:19:19,528 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:19:19,528 - Model - INFO - Start testing on single file...
+2025-05-08 16:19:21,531 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\0.pcd: Class 2 (Class_2)
+2025-05-08 16:19:21,531 - Model - INFO - Testing finished.
+2025-05-08 16:19:48,932 - Model - INFO - PARAMETER ...
+2025-05-08 16:19:48,932 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\1.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:19:48,932 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd
+2025-05-08 16:19:54,449 - Model - INFO - File loaded.
+2025-05-08 16:19:54,449 - Model - INFO - Load model ...
+2025-05-08 16:19:54,450 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:19:54,452 - Model - INFO - Import module done.
+2025-05-08 16:19:54,462 - Model - INFO - Model loaded.
+2025-05-08 16:19:54,554 - Model - INFO - Model moved to GPU.
+2025-05-08 16:19:54,555 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:19:55,455 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:19:55,455 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:19:55,457 - Model - INFO - Building class subspaces...
+2025-05-08 16:19:56,218 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:19:56,219 - Model - INFO - Start testing on single file...
+2025-05-08 16:19:58,072 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd: Class 2 (Class_2)
+2025-05-08 16:19:58,072 - Model - INFO - Testing finished.
+2025-05-08 16:20:05,967 - Model - INFO - PARAMETER ...
+2025-05-08 16:20:05,967 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:20:05,967 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:20:11,403 - Model - INFO - File loaded.
+2025-05-08 16:20:11,403 - Model - INFO - Load model ...
+2025-05-08 16:20:11,403 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:20:11,405 - Model - INFO - Import module done.
+2025-05-08 16:20:11,416 - Model - INFO - Model loaded.
+2025-05-08 16:20:11,509 - Model - INFO - Model moved to GPU.
+2025-05-08 16:20:11,509 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:20:12,377 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:20:12,377 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:20:12,381 - Model - INFO - Building class subspaces...
+2025-05-08 16:20:13,122 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:20:13,122 - Model - INFO - Start testing on single file...
+2025-05-08 16:20:14,852 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:20:14,852 - Model - INFO - Testing finished.
+2025-05-08 16:20:53,773 - Model - INFO - PARAMETER ...
+2025-05-08 16:20:53,773 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:20:53,773 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:21:22,121 - Model - INFO - PARAMETER ...
+2025-05-08 16:21:22,122 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:21:22,122 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:21:26,276 - Model - INFO - File loaded.
+2025-05-08 16:21:26,276 - Model - INFO - Load model ...
+2025-05-08 16:21:26,276 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:21:26,277 - Model - INFO - Import module done.
+2025-05-08 16:21:26,290 - Model - INFO - Model loaded.
+2025-05-08 16:21:26,365 - Model - INFO - Model moved to GPU.
+2025-05-08 16:21:26,365 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:21:27,245 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:21:27,245 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:21:27,248 - Model - INFO - Building class subspaces...
+2025-05-08 16:21:28,000 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:21:28,000 - Model - INFO - Start testing on single file...
+2025-05-08 16:21:29,788 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:21:29,788 - Model - INFO - Testing finished.
+2025-05-08 16:21:35,154 - Model - INFO - PARAMETER ...
+2025-05-08 16:21:35,154 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:21:35,154 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:23:14,984 - Model - INFO - PARAMETER ...
+2025-05-08 16:23:14,984 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:23:14,984 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:23:23,459 - Model - INFO - File loaded.
+2025-05-08 16:23:23,459 - Model - INFO - Load model ...
+2025-05-08 16:23:23,460 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:23:23,462 - Model - INFO - Import module done.
+2025-05-08 16:23:23,474 - Model - INFO - Model loaded.
+2025-05-08 16:23:23,564 - Model - INFO - Model moved to GPU.
+2025-05-08 16:23:23,564 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:23:24,495 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:23:24,495 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:23:24,498 - Model - INFO - Building class subspaces...
+2025-05-08 16:23:25,239 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:23:25,239 - Model - INFO - Start testing on single file...
+2025-05-08 16:23:27,100 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:23:27,100 - Model - INFO - Testing finished.
+2025-05-08 16:24:42,592 - Model - INFO - PARAMETER ...
+2025-05-08 16:24:42,592 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:24:42,592 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:24:49,048 - Model - INFO - File loaded.
+2025-05-08 16:24:49,049 - Model - INFO - Load model ...
+2025-05-08 16:24:49,049 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:24:49,051 - Model - INFO - Import module done.
+2025-05-08 16:24:49,062 - Model - INFO - Model loaded.
+2025-05-08 16:24:49,150 - Model - INFO - Model moved to GPU.
+2025-05-08 16:24:49,150 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:24:50,013 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:24:50,013 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:24:50,016 - Model - INFO - Building class subspaces...
+2025-05-08 16:24:50,748 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:24:50,748 - Model - INFO - Start testing on single file...
+2025-05-08 16:24:52,510 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:24:52,510 - Model - INFO - Testing finished.
+2025-05-08 16:24:55,810 - Model - INFO - PARAMETER ...
+2025-05-08 16:24:55,810 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:24:55,811 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:25:07,301 - Model - INFO - File loaded.
+2025-05-08 16:25:07,302 - Model - INFO - Load model ...
+2025-05-08 16:25:07,302 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:25:07,304 - Model - INFO - Import module done.
+2025-05-08 16:25:07,320 - Model - INFO - Model loaded.
+2025-05-08 16:25:07,424 - Model - INFO - Model moved to GPU.
+2025-05-08 16:25:07,424 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:25:08,291 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:25:08,292 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:25:08,295 - Model - INFO - Building class subspaces...
+2025-05-08 16:25:09,024 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:25:09,025 - Model - INFO - Start testing on single file...
+2025-05-08 16:25:10,809 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:25:10,810 - Model - INFO - Testing finished.
+2025-05-08 16:25:28,300 - Model - INFO - PARAMETER ...
+2025-05-08 16:25:28,300 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\1.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:25:28,300 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd
+2025-05-08 16:25:58,307 - Model - INFO - File loaded.
+2025-05-08 16:25:58,307 - Model - INFO - Load model ...
+2025-05-08 16:25:58,309 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:25:58,311 - Model - INFO - Import module done.
+2025-05-08 16:25:58,321 - Model - INFO - Model loaded.
+2025-05-08 16:25:58,412 - Model - INFO - Model moved to GPU.
+2025-05-08 16:25:58,412 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:25:59,306 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:25:59,306 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:25:59,309 - Model - INFO - Building class subspaces...
+2025-05-08 16:26:00,038 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:26:00,038 - Model - INFO - Start testing on single file...
+2025-05-08 16:26:01,804 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd: Class 2 (Class_2)
+2025-05-08 16:26:01,804 - Model - INFO - Testing finished.
+2025-05-08 16:26:47,001 - Model - INFO - PARAMETER ...
+2025-05-08 16:26:47,001 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\1.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:26:47,001 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd
+2025-05-08 16:26:56,389 - Model - INFO - File loaded.
+2025-05-08 16:26:56,389 - Model - INFO - Load model ...
+2025-05-08 16:26:56,389 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:26:56,391 - Model - INFO - Import module done.
+2025-05-08 16:26:56,404 - Model - INFO - Model loaded.
+2025-05-08 16:26:56,494 - Model - INFO - Model moved to GPU.
+2025-05-08 16:26:56,494 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:26:57,369 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:26:57,370 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:26:57,372 - Model - INFO - Building class subspaces...
+2025-05-08 16:26:58,126 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:26:58,126 - Model - INFO - Start testing on single file...
+2025-05-08 16:26:59,939 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd: Class 2 (Class_2)
+2025-05-08 16:26:59,939 - Model - INFO - Testing finished.
+2025-05-08 16:27:53,474 - Model - INFO - PARAMETER ...
+2025-05-08 16:27:53,475 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\1.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:27:53,475 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd
+2025-05-08 16:28:00,438 - Model - INFO - File loaded.
+2025-05-08 16:28:00,438 - Model - INFO - Load model ...
+2025-05-08 16:28:00,439 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:28:00,440 - Model - INFO - Import module done.
+2025-05-08 16:28:00,454 - Model - INFO - Model loaded.
+2025-05-08 16:28:00,546 - Model - INFO - Model moved to GPU.
+2025-05-08 16:28:00,547 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:28:01,419 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:28:01,419 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:28:01,423 - Model - INFO - Building class subspaces...
+2025-05-08 16:28:02,171 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:28:02,172 - Model - INFO - Start testing on single file...
+2025-05-08 16:28:04,049 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\1.pcd: Class 2 (Class_2)
+2025-05-08 16:28:04,049 - Model - INFO - Testing finished.
+2025-05-08 16:28:11,854 - Model - INFO - PARAMETER ...
+2025-05-08 16:28:11,854 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:28:11,854 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:28:19,664 - Model - INFO - File loaded.
+2025-05-08 16:28:19,664 - Model - INFO - Load model ...
+2025-05-08 16:28:19,664 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:28:19,666 - Model - INFO - Import module done.
+2025-05-08 16:28:19,678 - Model - INFO - Model loaded.
+2025-05-08 16:28:19,781 - Model - INFO - Model moved to GPU.
+2025-05-08 16:28:19,781 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:28:20,651 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:28:20,652 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:28:20,655 - Model - INFO - Building class subspaces...
+2025-05-08 16:28:21,404 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:28:21,404 - Model - INFO - Start testing on single file...
+2025-05-08 16:28:23,166 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:28:23,166 - Model - INFO - Testing finished.
+2025-05-08 16:29:03,793 - Model - INFO - PARAMETER ...
+2025-05-08 16:29:03,793 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=True, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_appl_veg0.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:29:03,793 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd
+2025-05-08 16:29:08,011 - Model - INFO - File loaded.
+2025-05-08 16:29:08,012 - Model - INFO - Load model ...
+2025-05-08 16:29:08,012 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:29:08,014 - Model - INFO - Import module done.
+2025-05-08 16:29:08,025 - Model - INFO - Model loaded.
+2025-05-08 16:29:08,105 - Model - INFO - Model moved to GPU.
+2025-05-08 16:29:08,105 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:29:08,953 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:29:08,953 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_combined.npy...
+2025-05-08 16:29:08,966 - Model - INFO - Building class subspaces...
+2025-05-08 16:29:11,114 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:29:11,114 - Model - INFO - Start testing on single file...
+2025-05-08 16:29:12,866 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_appl_veg0.pcd: Class 2 (Class_2)
+2025-05-08 16:29:12,866 - Model - INFO - Testing finished.
+2025-05-08 16:29:51,813 - Model - INFO - PARAMETER ...
+2025-05-08 16:29:51,813 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=False, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_cars10.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:29:51,814 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars10.pcd
+2025-05-08 16:29:58,356 - Model - INFO - File loaded.
+2025-05-08 16:29:58,356 - Model - INFO - Load model ...
+2025-05-08 16:29:58,356 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:29:58,358 - Model - INFO - Import module done.
+2025-05-08 16:29:58,369 - Model - INFO - Model loaded.
+2025-05-08 16:29:58,455 - Model - INFO - Model moved to GPU.
+2025-05-08 16:29:58,455 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:29:59,350 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:29:59,350 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_full.npy...
+2025-05-08 16:29:59,355 - Model - INFO - Building class subspaces...
+2025-05-08 16:30:00,109 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:30:00,110 - Model - INFO - Start testing on single file...
+2025-05-08 16:30:01,900 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars10.pcd: Class 2 (Class_2)
+2025-05-08 16:30:01,900 - Model - INFO - Testing finished.
+2025-05-08 16:30:13,944 - Model - INFO - PARAMETER ...
+2025-05-08 16:30:13,945 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=True, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_cars10.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:30:13,945 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars10.pcd
+2025-05-08 16:30:17,350 - Model - INFO - File loaded.
+2025-05-08 16:30:17,350 - Model - INFO - Load model ...
+2025-05-08 16:30:17,350 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:30:17,352 - Model - INFO - Import module done.
+2025-05-08 16:30:17,364 - Model - INFO - Model loaded.
+2025-05-08 16:30:17,431 - Model - INFO - Model moved to GPU.
+2025-05-08 16:30:17,431 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:30:18,287 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:30:18,288 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_combined.npy...
+2025-05-08 16:30:18,292 - Model - INFO - Building class subspaces...
+2025-05-08 16:30:20,480 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:30:20,480 - Model - INFO - Start testing on single file...
+2025-05-08 16:30:22,215 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars10.pcd: Class 2 (Class_2)
+2025-05-08 16:30:22,215 - Model - INFO - Testing finished.
+2025-05-08 16:31:09,797 - Model - INFO - PARAMETER ...
+2025-05-08 16:31:09,798 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=True, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_cars78.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:31:09,798 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars78.pcd
+2025-05-08 16:31:15,185 - Model - INFO - File loaded.
+2025-05-08 16:31:15,185 - Model - INFO - Load model ...
+2025-05-08 16:31:15,186 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:31:15,188 - Model - INFO - Import module done.
+2025-05-08 16:31:15,200 - Model - INFO - Model loaded.
+2025-05-08 16:31:15,284 - Model - INFO - Model moved to GPU.
+2025-05-08 16:31:15,284 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:31:16,155 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:31:16,155 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_combined.npy...
+2025-05-08 16:31:16,160 - Model - INFO - Building class subspaces...
+2025-05-08 16:31:18,268 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:31:18,268 - Model - INFO - Start testing on single file...
+2025-05-08 16:31:19,941 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars78.pcd: Class 7 (Class_7)
+2025-05-08 16:31:19,941 - Model - INFO - Testing finished.
+2025-05-08 16:31:27,346 - Model - INFO - PARAMETER ...
+2025-05-08 16:31:27,346 - Model - INFO - Namespace(batch_size=24, create_splits=False, cut_type='half', data_path='D:/LAB/DATASETS/3DNet/Cat10_ModelDatabase', gpu='0', log_dir='pointnet_cls', num_category=10, num_point=1024, partial=True, single_file='D:\\LAB\\DATASETS\\3DNet\\Cat10_Test\\pcd_binary\\tt_cars18.pcd', subspace_dim=10, train_features_path=None, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-05-08 16:31:27,346 - Model - INFO - Testing on single file: D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars18.pcd
+2025-05-08 16:31:40,378 - Model - INFO - File loaded.
+2025-05-08 16:31:40,378 - Model - INFO - Load model ...
+2025-05-08 16:31:40,378 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-05-08 16:31:40,380 - Model - INFO - Import module done.
+2025-05-08 16:31:40,394 - Model - INFO - Model loaded.
+2025-05-08 16:31:40,521 - Model - INFO - Model moved to GPU.
+2025-05-08 16:31:40,522 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-05-08 16:31:41,366 - Model - INFO - Checkpoint loaded.
+2025-05-08 16:31:41,367 - Model - INFO - Loading training features from features/pointnet_cls/3dnet_train_features_combined.npy...
+2025-05-08 16:31:41,371 - Model - INFO - Building class subspaces...
+2025-05-08 16:31:43,557 - Model - INFO - Built subspaces with dimension 10
+2025-05-08 16:31:43,557 - Model - INFO - Start testing on single file...
+2025-05-08 16:31:45,293 - Model - INFO - Prediction for D:\LAB\DATASETS\3DNet\Cat10_Test\pcd_binary\tt_cars18.pcd: Class 2 (Class_2)
+2025-05-08 16:31:45,293 - Model - INFO - Testing finished.

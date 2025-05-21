@@ -1,0 +1,99 @@
+2025-02-21 16:51:56,292 - Model - INFO - PARAMETER ...
+2025-02-21 16:51:56,292 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet_cls', num_category=40, num_point=1024, num_votes=3, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-02-21 16:51:56,292 - Model - INFO - Load dataset ...
+2025-02-21 16:51:56,293 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-21 16:51:56,302 - Model - INFO - Dataset loaded.
+2025-02-21 16:51:56,302 - Model - INFO - Load model ...
+2025-02-21 16:51:56,303 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-21 16:51:56,304 - Model - INFO - Import module done.
+2025-02-21 16:51:56,316 - Model - INFO - Model loaded.
+2025-02-21 16:51:56,397 - Model - INFO - Model moved to GPU.
+2025-02-21 16:51:56,397 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-21 16:51:57,385 - Model - INFO - Checkpoint loaded.
+2025-02-21 16:51:57,385 - Model - INFO - Start testing ...
+2025-02-21 16:52:25,788 - Model - INFO - Test Instance Accuracy: 0.910841, Class Accuracy: 0.878623
+2025-02-21 16:52:25,788 - Model - INFO - Testing finished.
+2025-02-25 14:48:48,493 - Model - INFO - PARAMETER ...
+2025-02-25 14:48:48,493 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet_cls', num_category=40, num_point=1024, num_votes=3, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-02-25 14:48:48,493 - Model - INFO - Load dataset ...
+2025-02-25 14:48:48,493 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-25 14:48:48,517 - Model - INFO - Dataset loaded.
+2025-02-25 14:48:48,517 - Model - INFO - Load model ...
+2025-02-25 14:48:48,518 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-25 14:48:48,535 - Model - INFO - Import module done.
+2025-02-25 14:48:48,562 - Model - INFO - Model loaded.
+2025-02-25 14:48:48,702 - Model - INFO - Model moved to GPU.
+2025-02-25 14:48:48,702 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-25 14:48:48,765 - Model - INFO - Checkpoint loaded.
+2025-02-25 14:48:48,766 - Model - INFO - Start testing ...
+2025-02-25 14:49:07,674 - Model - INFO - Test Instance Accuracy: 0.910437, Class Accuracy: 0.877373
+2025-02-25 14:49:07,674 - Model - INFO - Testing finished.
+2025-02-26 08:28:40,119 - Model - INFO - PARAMETER ...
+2025-02-26 08:28:40,120 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet_cls', num_category=40, num_point=1024, num_votes=3, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-02-26 08:28:40,120 - Model - INFO - Load dataset ...
+2025-02-26 08:28:40,120 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-26 08:28:40,144 - Model - INFO - Dataset loaded.
+2025-02-26 08:28:40,144 - Model - INFO - Load model ...
+2025-02-26 08:28:40,144 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-26 08:28:40,147 - Model - INFO - Import module done.
+2025-02-26 08:28:40,159 - Model - INFO - Model loaded.
+2025-02-26 08:28:40,259 - Model - INFO - Model moved to GPU.
+2025-02-26 08:28:40,260 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-26 08:28:40,338 - Model - INFO - Checkpoint loaded.
+2025-02-26 08:28:40,338 - Model - INFO - Start testing ...
+2025-02-26 08:28:58,650 - Model - INFO - Test Instance Accuracy: 0.910437, Class Accuracy: 0.877373
+2025-02-26 08:28:58,650 - Model - INFO - Testing finished.
+2025-02-26 08:29:43,024 - Model - INFO - PARAMETER ...
+2025-02-26 08:29:43,025 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet_cls', num_category=40, num_point=1024, num_votes=3, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-02-26 08:29:43,025 - Model - INFO - Load dataset ...
+2025-02-26 08:29:43,025 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-26 08:29:43,035 - Model - INFO - Dataset loaded.
+2025-02-26 08:29:43,035 - Model - INFO - Load model ...
+2025-02-26 08:29:43,035 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-26 08:29:43,037 - Model - INFO - Import module done.
+2025-02-26 08:29:43,061 - Model - INFO - Model loaded.
+2025-02-26 08:29:43,161 - Model - INFO - Model moved to GPU.
+2025-02-26 08:29:43,161 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-26 08:29:44,972 - Model - INFO - Checkpoint loaded.
+2025-02-26 08:29:44,973 - Model - INFO - Start testing ...
+2025-02-26 08:30:10,996 - Model - INFO - Test Instance Accuracy: 0.910841, Class Accuracy: 0.878623
+2025-02-26 08:30:10,997 - Model - INFO - Testing finished.
+2025-02-26 10:52:28,379 - Model - INFO - PARAMETER ...
+2025-02-26 10:52:28,379 - Model - INFO - Namespace(use_cpu=False, gpu='0', batch_size=24, num_category=40, num_point=1024, log_dir='pointnet_cls', use_normals=False, use_uniform_sample=False, num_votes=3)
+2025-02-26 10:52:28,379 - Model - INFO - Load dataset ...
+2025-02-26 10:52:28,379 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-26 10:52:28,397 - Model - INFO - Dataset loaded.
+2025-02-26 10:52:28,397 - Model - INFO - Load model ...
+2025-02-26 10:52:28,397 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-26 10:52:28,414 - Model - INFO - Import module done.
+2025-02-26 10:52:28,427 - Model - INFO - Model loaded.
+2025-02-26 10:52:28,527 - Model - INFO - Model moved to GPU.
+2025-02-26 10:52:28,527 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-26 11:01:03,286 - Model - INFO - PARAMETER ...
+2025-02-26 11:01:03,287 - Model - INFO - Namespace(use_cpu=False, gpu='0', batch_size=24, num_category=40, num_point=1024, log_dir='pointnet_cls', use_normals=False, use_uniform_sample=False, num_votes=3)
+2025-02-26 11:01:03,287 - Model - INFO - Load dataset ...
+2025-02-26 11:01:03,287 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-26 11:01:03,293 - Model - INFO - Dataset loaded.
+2025-02-26 11:01:03,293 - Model - INFO - Load model ...
+2025-02-26 11:01:03,293 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-26 11:01:03,294 - Model - INFO - Import module done.
+2025-02-26 11:01:03,306 - Model - INFO - Model loaded.
+2025-02-26 11:01:03,398 - Model - INFO - Model moved to GPU.
+2025-02-26 11:01:03,398 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-26 11:01:03,455 - Model - INFO - Checkpoint loaded.
+2025-02-26 11:01:03,455 - Model - INFO - Start testing ...
+2025-02-26 13:57:30,360 - Model - INFO - PARAMETER ...
+2025-02-26 13:57:30,360 - Model - INFO - Namespace(batch_size=24, gpu='0', log_dir='pointnet_cls', num_category=40, num_point=1024, num_votes=3, use_cpu=False, use_normals=False, use_uniform_sample=False)
+2025-02-26 13:57:30,360 - Model - INFO - Load dataset ...
+2025-02-26 13:57:30,360 - Model - INFO - Data path: data/modelnet40_normal_resampled/
+2025-02-26 13:57:30,384 - Model - INFO - Dataset loaded.
+2025-02-26 13:57:30,385 - Model - INFO - Load model ...
+2025-02-26 13:57:30,385 - Model - INFO - Model name: pointnet_cls, Path: log/classification/pointnet_cls/logs
+2025-02-26 13:57:30,388 - Model - INFO - Import module done.
+2025-02-26 13:57:30,400 - Model - INFO - Model loaded.
+2025-02-26 13:57:30,583 - Model - INFO - Model moved to GPU.
+2025-02-26 13:57:30,584 - Model - INFO - Checkpoint path: log/classification/pointnet_cls/checkpoints/best_model.pth
+2025-02-26 13:57:31,578 - Model - INFO - Checkpoint loaded.
+2025-02-26 13:57:31,578 - Model - INFO - Start testing ...
+2025-02-26 13:57:44,543 - Model - INFO - Test Instance Accuracy: 0.585032, Class Accuracy: 0.523254
+2025-02-26 13:57:44,543 - Model - INFO - Testing finished.
