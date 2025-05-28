@@ -56,7 +56,8 @@ def process_point_clouds_with_alignment(
 
         # 1. Apply ROI filter
         points = np.asarray(pcd.points)
-        mask = np.all((points >= (-0.2, -0.5, -1)) & (points <= (0.2, 0.5, 1)), axis=1)
+        # TODO: make this a parameter
+        mask = np.all((points >= (-0.2, -0.5, -.5)) & (points <= (0.2, 0.5, 0)), axis=1)
         filtered_pcd = pcd.select_by_index(np.where(mask)[0])
 
         # Skip further processing if point cloud is empty
@@ -107,7 +108,8 @@ def process_point_clouds_with_alignment(
 
         
         # 3. Apply height threshold filtering (y > -0.09)
-        mask = np.asarray(filtered_pcd.points)[:, 1] > -0.09
+        # TODO: make this a parameter
+        mask = np.asarray(filtered_pcd.points)[:, 1] > -0.094
         filtered_pcd = filtered_pcd.select_by_index(np.where(mask)[0])
 
         # 4. Remove statistical outliers
@@ -187,18 +189,19 @@ def process_point_clouds_with_alignment(
 # Example usage
 if __name__ == "__main__":
     folders = [
-        "F:/LiDAR Videos/RobotCV/box_1/",
-        "F:/LiDAR Videos/RobotCV/bottle_1/",
-        "F:/LiDAR Videos/RobotCV/hand_1/",
-        "F:/LiDAR Videos/RobotCV/can_1/",
-        "F:/LiDAR Videos/RobotCV/box_2/",
-        "F:/LiDAR Videos/RobotCV/box_3/",
-        "F:/LiDAR Videos/RobotCV/can_2/",
-        "F:/LiDAR Videos/RobotCV/can_3/",
-        "F:/LiDAR Videos/RobotCV/hand_2/",
-        "F:/LiDAR Videos/RobotCV/hand_3/",
-        "F:/LiDAR Videos/RobotCV/bottle_2/",
-        "F:/LiDAR Videos/RobotCV/bottle_3/",
+        "F:/LiDAR Videos/RobotCV/ball_1/",
+        # "F:/LiDAR Videos/RobotCV/box_1/",
+        # "F:/LiDAR Videos/RobotCV/bottle_1/",
+        # "F:/LiDAR Videos/RobotCV/hand_1/",
+        # "F:/LiDAR Videos/RobotCV/can_1/",
+        # "F:/LiDAR Videos/RobotCV/box_2/",
+        # "F:/LiDAR Videos/RobotCV/box_3/",
+        # "F:/LiDAR Videos/RobotCV/can_2/",
+        # "F:/LiDAR Videos/RobotCV/can_3/",
+        # "F:/LiDAR Videos/RobotCV/hand_2/",
+        # "F:/LiDAR Videos/RobotCV/hand_3/",
+        # "F:/LiDAR Videos/RobotCV/bottle_2/",
+        # "F:/LiDAR Videos/RobotCV/bottle_3/",
     ]
 
     for folder in folders:
@@ -206,7 +209,7 @@ if __name__ == "__main__":
         result = process_point_clouds_with_alignment(
             ply_folder=os.path.join(folder, "ply"),
             output_folder=os.path.join(folder, "filtered_ply"),
-            reference_point=np.array([-0.02, 0.26, -0.54]),
-            roi_size=np.array([0.3, 0.5, 0.3]),
+            reference_point=np.array([0, 0, -0.25]),
+            roi_size=np.array([0.4, 1, 0.5]),
             visualization=True,
         )

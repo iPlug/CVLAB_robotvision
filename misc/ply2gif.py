@@ -95,7 +95,7 @@ def ply_to_gif(input_folder, output_gif, framerate=10, width=800, height=600):
 
             # Filter points within ROI
             mask = np.all(
-                (points >= (-0.2, -0.5, -1)) & (points <= (0.2, 0.5, 1)), axis=1
+                (points >= (-0.2, -0.5, -.5)) & (points <= (0.2, 0.5, 0)), axis=1
             )
             current_pcd = current_pcd.select_by_index(np.where(mask)[0])
 
@@ -112,7 +112,7 @@ def ply_to_gif(input_folder, output_gif, framerate=10, width=800, height=600):
             vis.update_geometry(display_pcd)
             vis.poll_events()
             vis.update_renderer()
-
+            vis.run()
             # Capture image and save
             image = vis.capture_screen_float_buffer(do_render=True)
             image_np = np.asarray(image)
@@ -152,13 +152,13 @@ def main():
         "--i",
         type=str,
         help="Folder containing PLY files",
-        default="F:\LiDAR Videos\RobotCV\\hand_3\\ply",
+        default="F:\LiDAR Videos\RobotCV\\ball_1\\ply",
     )
     parser.add_argument(
         "--o",
         type=str,
         help="Output GIF file",
-        default="F:\LiDAR Videos\RobotCV\\hand_3\\raw.gif",
+        default="F:\LiDAR Videos\RobotCV\\ball_1\\raw.gif",
     )
     parser.add_argument(
         "--framerate",
