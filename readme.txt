@@ -1,4 +1,4 @@
-Create VENV using requirements.txt
+Create VENV using requirements.txt and Python 3.8.0
 
 Install PyTorch
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
