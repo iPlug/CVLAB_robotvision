@@ -210,9 +210,9 @@ if __name__ == "__main__":
         # "bottle_3",
     ]
 
-    for object in objects:
-        object_folder_path = os.path.join(os.getenv("BAG_FILE_ROOT_FOLDER"), object)
-        print(f"Processing object {object} in {object_folder_path}")
+    for object_3d in objects:
+        object_folder_path = os.path.join(os.getenv("BAG_FILE_ROOT_FOLDER"), object_3d)
+        print(f"Processing object {object_3d} in {object_folder_path}")
         result = process_point_clouds_with_alignment(
             ply_folder=os.path.join(object_folder_path, "ply"),
             output_folder=os.path.join(object_folder_path, "filtered_ply"),

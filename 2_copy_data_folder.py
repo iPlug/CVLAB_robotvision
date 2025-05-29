@@ -1,25 +1,28 @@
 import os
 import shutil
 import glob
+from utils.load_env import load_env
+
+load_env('local')
 
 # Source folders list
-folders = [
-    "F:/LiDAR Videos/RobotCV/box_1/",
-    "F:/LiDAR Videos/RobotCV/bottle_1/",
-    "F:/LiDAR Videos/RobotCV/hand_1/",
-    "F:/LiDAR Videos/RobotCV/can_1/",
-    "F:/LiDAR Videos/RobotCV/box_2/",
-    "F:/LiDAR Videos/RobotCV/box_3/",
-    "F:/LiDAR Videos/RobotCV/can_2/",
-    "F:/LiDAR Videos/RobotCV/can_3/",
-    "F:/LiDAR Videos/RobotCV/hand_2/",
-    "F:/LiDAR Videos/RobotCV/hand_3/",
-    "F:/LiDAR Videos/RobotCV/bottle_2/",
-    "F:/LiDAR Videos/RobotCV/bottle_3/",
+objects = [
+    "box_1",
+    "bottle_1",
+    "hand_1",
+    "can_1",
+    "box_2",
+    "box_3",
+    "can_2",
+    "can_3",
+    "hand_2",
+    "hand_3",
+    "bottle_2",
+    "bottle_3",
 ]
 
 # Destination root folder
-dest_root = "D:\LAB\DATASETS\CVLABPCD"
+dest_root = os.getenv('DEST_COPY_ROOT_FOLDER')
 
 # Maximum files per source folder
 MAX_FILES_PER_SOURCE = 450
@@ -34,15 +37,15 @@ total_files = 0
 total_copied = 0
 
 # Process each folder
-for folder in folders:
-    # Get folder name (e.g., "box_1")
-    folder_name = os.path.basename(os.path.normpath(folder))
+for object_3d in objects:
+    # Create object path according to env
+    object_3d_path = os.path.join(os.getenv('BAG_FILE_ROOT_FOLDER'), object_3d)
 
     # Source path with filtered_pcd
-    source_path = os.path.join(folder, "filtered_ply")
+    source_path = os.path.join(object_3d_path, "filtered_ply")
 
     # Destination path without filtered_pcd
-    dest_path = os.path.join(dest_root, folder_name)
+    dest_path = os.path.join(dest_root, object_3d)
 
     # Create destination directory if it doesn't exist
     if not os.path.exists(dest_path):
@@ -163,7 +166,7 @@ def organize_train_test_split(source_folders, target_root, max_files_per_source=
     return train_files_count, test_files_count
 
 
-target_folder = "D:/LAB/DATASETS/robot_simple"
+target_folder = os.getenv('DATASET_ROOT_FOLDER')
 
 # Create target folder if it doesn't exist
 if not os.path.exists(target_folder):
@@ -172,7 +175,7 @@ if not os.path.exists(target_folder):
 
 # Organize files with maximum files per source limit
 print(f"\nOrganizing files into train/test structure at: {target_folder}")
-train_count, test_count = organize_train_test_split(folders, target_folder, MAX_FILES_PER_SOURCE)
+train_count, test_count = organize_train_test_split(objects, target_folder, MAX_FILES_PER_SOURCE)
 
 # Print summary
 print("\nTrain/Test split completed!")
