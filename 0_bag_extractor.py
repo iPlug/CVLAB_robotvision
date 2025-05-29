@@ -2,9 +2,13 @@ import os
 import subprocess
 import glob
 from tqdm import tqdm
+from utils.load_env import load_env
+
+#Load env
+load_env('local')
 
 # Configure these variables as needed
-root_folder = "F:\LiDAR Videos\RobotCV"  # Root folder containing bag files
+root_folder = os.getenv("BAG_FILE_ROOT_FOLDER")  # Root folder containing bag files
 output_parent_folder = root_folder  # Where to create the output folders (can be different from root_folder)
 
 # Find all .bag files in the root folder
