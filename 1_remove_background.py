@@ -7,6 +7,9 @@ import time
 from tqdm import tqdm
 from sklearn.cluster import DBSCAN
 import PIL.Image as Image
+from utils.load_env import load_env
+
+
 
 
 def process_point_clouds_with_alignment(
@@ -188,27 +191,31 @@ def process_point_clouds_with_alignment(
 
 # Example usage
 if __name__ == "__main__":
-    folders = [
-        "F:/LiDAR Videos/RobotCV/ball_1/",
-        # "F:/LiDAR Videos/RobotCV/box_1/",
-        # "F:/LiDAR Videos/RobotCV/bottle_1/",
-        # "F:/LiDAR Videos/RobotCV/hand_1/",
-        # "F:/LiDAR Videos/RobotCV/can_1/",
-        # "F:/LiDAR Videos/RobotCV/box_2/",
-        # "F:/LiDAR Videos/RobotCV/box_3/",
-        # "F:/LiDAR Videos/RobotCV/can_2/",
-        # "F:/LiDAR Videos/RobotCV/can_3/",
-        # "F:/LiDAR Videos/RobotCV/hand_2/",
-        # "F:/LiDAR Videos/RobotCV/hand_3/",
-        # "F:/LiDAR Videos/RobotCV/bottle_2/",
-        # "F:/LiDAR Videos/RobotCV/bottle_3/",
+    # Load env
+    load_env('local')
+
+    objects = [
+        "ball_1",
+        # "box_1",
+        # "bottle_1",
+        # "hand_1",
+        # "can_1",
+        # "box_2",
+        # "box_3",
+        # "can_2",
+        # "can_3",
+        # "hand_2",
+        # "hand_3",
+        # "bottle_2",
+        # "bottle_3",
     ]
 
-    for folder in folders:
-        print(f"Processing folder: {folder}")
+    for object in objects:
+        object_folder_path = os.path.join(os.getenv("BAG_FILE_ROOT_FOLDER"), object)
+        print(f"Processing object {object} in {object_folder_path}")
         result = process_point_clouds_with_alignment(
-            ply_folder=os.path.join(folder, "ply"),
-            output_folder=os.path.join(folder, "filtered_ply"),
+            ply_folder=os.path.join(object_folder_path, "ply"),
+            output_folder=os.path.join(object_folder_path, "filtered_ply"),
             reference_point=np.array([0, 0, -0.25]),
             roi_size=np.array([0.4, 1, 0.5]),
             visualization=True,
