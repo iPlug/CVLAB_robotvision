@@ -6,6 +6,9 @@ from tqdm import tqdm
 import os
 import sys
 import argparse
+from utils.load_env import load_env
+
+load_env('local')
 
 # Import paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -384,7 +387,7 @@ if __name__ == "__main__":
     # Set default num_category based on dataset if not specified
     
     args.num_category = 4
-    args.data_path = "D:\LAB\DATASETS\\robot_simple"
+    args.data_path = os.getenv('DATASET_ROOT_FOLDER')
 
     results = main(args)
     print("Feature extraction completed.")
