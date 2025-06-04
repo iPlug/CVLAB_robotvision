@@ -1,17 +1,24 @@
 import os
+import sys
 import subprocess
 import glob
 from tqdm import tqdm
-from utils.load_env import load_env
+from utils.load_env import load_env, get_env
 
-#Load env
-load_env('local')
+# Load and validate environment variables
+try:
+    load_env('local')
+except (FileNotFoundError, ValueError) as e:
+    print(f"Environment configuration error: {e}")
+    sys.exit(1)
 
-# Configure these variables as needed
-root_folder = os.getenv("BAG_FILE_ROOT_FOLDER")  # Root folder containing bag files
-output_parent_folder = root_folder  # Where to create the output folders (can be different from root_folder)
+# Get root folder from environment
+root_folder = get_env("BAG_FILE_ROOT_FOLDER")
+if not os.path.exists(root_folder):
+    print(f"Error: BAG_FILE_ROOT_FOLDER '{root_folder}' does not exist")
+    sys.exit(1)
 
-# Find all .bag files in the root folder
+# Change to root directory
 os.chdir(root_folder)
 bag_files = glob.glob("*.bag")
 
@@ -21,7 +28,7 @@ for bag_file in tqdm(bag_files, desc="Processing bag files"):
     file_name = os.path.splitext(bag_file)[0]
 
     # Create the directory structure
-    output_dir = os.path.join(output_parent_folder, file_name)
+    output_dir = os.path.join(root_folder, file_name)
     ply_dir = os.path.join(output_dir, "ply")
     png_dir = os.path.join(output_dir, "png")
 
