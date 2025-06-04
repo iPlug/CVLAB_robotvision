@@ -1,24 +1,26 @@
-import open3d as o3d
-import numpy as np
-import glob
 import os
+import sys
+import glob
 import copy
 import time
+from pathlib import Path
+import numpy as np
+import open3d as o3d
 from tqdm import tqdm
 from sklearn.cluster import DBSCAN
 import PIL.Image as Image
-from utils.load_env import load_env
+from utils.load_env import load_env, get_env
 
 
 
 
 def process_point_clouds_with_alignment(
-    ply_folder,
-    output_folder,
-    reference_point=np.array([-0.02, 0.1, -0.54]),
-    roi_size=np.array([0.3, 0.5, 0.3]),
-    visualization=False,
-):
+    ply_folder: str,
+    output_folder: str,
+    reference_point: np.ndarray = np.array([-0.02, 0.1, -0.54]),
+    roi_size: np.ndarray = np.array([0.3, 0.5, 0.3]),
+    visualization: bool = False,
+) -> str:
     """
     Enhanced point cloud processing pipeline with single loop:
     Processing and visualization happen in a single loop.
@@ -29,7 +31,23 @@ def process_point_clouds_with_alignment(
         reference_point: Center point of the manual ROI
         roi_size: Size of the ROI box [x, y, z] in meters
         visualization: Whether to visualize results
+
+    Returns:
+        str: Status of the processing ('success' or error message)
+
+    Raises:
+        FileNotFoundError: If ply_folder doesn't exist
+        ValueError: If no PLY files are found in the folder
     """
+    # Convert string paths to Path objects
+    ply_folder = Path(ply_folder)
+    output_folder = Path(output_folder)
+
+    # Validate input folder
+    if not ply_folder.exists():
+        raise FileNotFoundError(f"Input folder not found: {ply_folder}")
+        
+    # Create output folder
     os.makedirs(output_folder, exist_ok=True)
     # gif_folder is parent of ply_folder
     gif_folder = os.path.dirname(ply_folder)
@@ -210,12 +228,30 @@ if __name__ == "__main__":
         # "bottle_3",
     ]
 
+    # Load and validate environment
+    try:
+        load_env('local')
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Environment configuration error: {e}")
+        sys.exit(1)
+
+    root_folder = get_env("BAG_FILE_ROOT_FOLDER")
+    if not os.path.exists(root_folder):
+        print(f"Error: BAG_FILE_ROOT_FOLDER '{root_folder}' does not exist")
+        sys.exit(1)
+
     for object_3d in objects:
-        object_folder_path = os.path.join(os.getenv("BAG_FILE_ROOT_FOLDER"), object_3d)
+        object_folder_path = Path(root_folder) / object_3d
         print(f"Processing object {object_3d} in {object_folder_path}")
+        
+        # Verify object folder exists
+        if not object_folder_path.exists():
+            print(f"Warning: Object folder {object_folder_path} not found, skipping...")
+            continue
+
         result = process_point_clouds_with_alignment(
-            ply_folder=os.path.join(object_folder_path, "ply"),
-            output_folder=os.path.join(object_folder_path, "filtered_ply"),
+            ply_folder=str(object_folder_path / "ply"),
+            output_folder=str(object_folder_path / "filtered_ply"),
             reference_point=np.array([0, 0, -0.25]),
             roi_size=np.array([0.4, 1, 0.5]),
             visualization=True,
