@@ -90,6 +90,8 @@ threadpoolctl==3.5.0
 tifffile==2023.7.10
 tornado==6.4.2
 tqdm==4.67.1
+torch>=2.0.0
+torchvision>=0.16.0
 traitlets==5.14.3
 trimesh==4.6.3
 typing-extensions==4.12.2
