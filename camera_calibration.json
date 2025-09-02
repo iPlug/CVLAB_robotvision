@@ -1,0 +1,11 @@
+{
+  "camera_matrix": [
+    [640.0, 0.0, 320.0],
+    [0.0, 640.0, 240.0],
+    [0.0, 0.0, 1.0]
+  ],
+  "dist_coeffs": [0.0, 0.0, 0.0, 0.0, 0.0],
+  "image_size": [640, 480],
+  "source": "factory_calibration",
+  "notes": "Placeholder for RealSense L515 factory calibration - actual parameters will be retrieved from RealSense SDK"
+}

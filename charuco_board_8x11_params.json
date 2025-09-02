@@ -1,0 +1,14 @@
+{
+  "squares_x": 8,
+  "squares_y": 11,
+  "square_length_mm": 25.0,
+  "marker_length_mm": 20.0,
+  "aruco_dict": "DICT_6X6_250",
+  "board_size_pixels": [
+    800,
+    1100
+  ],
+  "total_squares": 88,
+  "total_corners": 70,
+  "expected_markers": 44
+}

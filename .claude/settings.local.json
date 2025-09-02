@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/python.exe test_module_functionality.py:*)",
+      "Bash(.venv/Scripts/python.exe modular_calibrate_camera.py:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:github.com)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "task-master-ai"
+  ]
+}

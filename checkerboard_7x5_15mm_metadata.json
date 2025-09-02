@@ -1,0 +1,41 @@
+{
+  "pattern_info": {
+    "size": [
+      7,
+      5
+    ],
+    "square_size_mm": 15.0,
+    "internal_corners": [
+      7,
+      5
+    ],
+    "total_squares": [
+      8,
+      6
+    ],
+    "physical_size_mm": [
+      120.0,
+      90.0
+    ]
+  },
+  "generation_info": {
+    "generated_date": "2025-08-04T10:02:52.184092",
+    "generator_version": "1.0",
+    "dpi": 300,
+    "paper_size": "A4",
+    "pattern_id": null,
+    "image_file": "checkerboard_7x5_15mm.png"
+  },
+  "printing_info": {
+    "recommended_dpi": 300,
+    "paper_type": "Matte photo paper or high-quality white paper",
+    "scaling": "100% (actual size)",
+    "color_mode": "Grayscale or Black & White"
+  },
+  "usage_info": {
+    "mounting": "Rigid, flat surface (cardboard, foam board, etc.)",
+    "lighting": "Even, diffuse lighting without shadows",
+    "handling": "Avoid bending, folding, or damaging the pattern",
+    "verification": "Measure squares with ruler to verify correct size"
+  }
+}
