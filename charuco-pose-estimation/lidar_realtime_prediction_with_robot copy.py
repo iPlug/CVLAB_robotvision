@@ -150,58 +150,55 @@ class EnhancedLidarPredictor:
         if self.enhanced_robot_controller:
             # Check if it has is_connected attribute
             if hasattr(self.enhanced_robot_controller, 'is_connected'):
-                is_connected = self.enhanced_robot_controller.is_connected
-                if not is_connected:
-                    print(f"Debug: Robot controller exists but is_connected = {is_connected}")
-                return is_connected
+                return self.enhanced_robot_controller.is_connected
             else:
                 # Fallback: assume available if we have the controller
-                print("Debug: Robot controller exists but no is_connected attribute - assuming available")
                 return True
-        else:
-            print("Debug: No enhanced_robot_controller available")
         return False
     
     def _initialize_enhanced_robot_controller(self):
-        """Initialize enhanced robot controller."""
+        """Initialize enhanced robot controller using existing robot connection from robot_utils."""
         try:
-            # Use robot controller from robot_utils if available, otherwise create new one
-            if hasattr(self.robot_utils, 'robot') and self.robot_utils.robot is not None:
-                self.enhanced_robot_controller = self.robot_utils.robot
-                print("✓ Using existing robot controller from robot_utils")
-            else:
-                # Initialize robot controller directly as fallback
-                self.enhanced_robot_controller = MyCobotController()
-                print("✓ Created new robot controller")
-            
-            # Try to enable async mode if available
-            if hasattr(self.enhanced_robot_controller, 'enable_async_mode'):
-                if self.enhanced_robot_controller.enable_async_mode(max_queue_size=5):
-                    print("✓ Robot async mode enabled for smooth visualization")
-                else:
-                    print("! Async mode not available - using synchronous commands")
-            else:
-                print("! Async mode not supported by this robot controller")
-                
-            # Try to capture base joint angles for camera tilt control
-            try:
-                if hasattr(self.enhanced_robot_controller, 'get_joint_angles'):
-                    self.base_joint_angles = self.enhanced_robot_controller.get_joint_angles()
-                    if self.base_joint_angles and len(self.base_joint_angles) >= 6:
-                        print(f"✓ Base joint angles captured: {[f'{x:.1f}' for x in self.base_joint_angles]}")
-                        print("✓ Camera tilt controls (w/s keys) enabled")
-                        self.robot_in_observation_pose = True
+            # Use the existing robot connection from robot_utils to avoid COM port conflicts
+            if self.robot_utils.robot and hasattr(self.robot_utils.robot, 'is_connected'):
+                if self.robot_utils.robot.is_connected:
+                    print("✓ Using existing robot connection from robot_utils")
+                    self.enhanced_robot_controller = self.robot_utils.robot
+                    
+                    # Try to enable async mode if available
+                    if hasattr(self.enhanced_robot_controller, 'enable_async_mode'):
+                        if self.enhanced_robot_controller.enable_async_mode(max_queue_size=5):
+                            print("✓ Robot async mode enabled for smooth visualization")
+                        else:
+                            print("! Async mode not available - using synchronous commands")
                     else:
-                        print("! Could not capture base joint angles - camera tilt controls disabled")
+                        print("! Async mode not supported by this robot controller")
+                    
+                    # Try to capture base joint angles for camera tilt control
+                    try:
+                        if hasattr(self.enhanced_robot_controller, 'get_joint_angles'):
+                            self.base_joint_angles = self.enhanced_robot_controller.get_joint_angles()
+                            if self.base_joint_angles and len(self.base_joint_angles) >= 6:
+                                print(f"✓ Base joint angles captured: {[f'{x:.1f}' for x in self.base_joint_angles]}")
+                                print("✓ Camera tilt controls (w/s keys) enabled")
+                                self.robot_in_observation_pose = True
+                            else:
+                                print("! Could not capture base joint angles - camera tilt controls disabled")
+                                self.base_joint_angles = None
+                        else:
+                            print("! get_joint_angles not available - camera tilt controls disabled")
+                            self.base_joint_angles = None
+                    except Exception as e:
+                        print(f"! Failed to capture base joint angles: {e}")
                         self.base_joint_angles = None
+                        
+                    print("✓ Enhanced robot functionality initialized with existing connection")
                 else:
-                    print("! get_joint_angles not available - camera tilt controls disabled")
-                    self.base_joint_angles = None
-            except Exception as e:
-                print(f"! Failed to capture base joint angles: {e}")
-                self.base_joint_angles = None
-                
-            print("✓ Enhanced robot functionality initialized with existing connection")
+                    print("! Robot connection exists but not connected - enhanced features disabled")
+                    self.enhanced_robot_controller = None
+            else:
+                print("! No robot connection available from robot_utils - enhanced features disabled")
+                self.enhanced_robot_controller = None
                 
         except Exception as e:
             print(f"! Error setting up enhanced robot functionality: {e}")
@@ -245,7 +242,23 @@ class EnhancedLidarPredictor:
         return self.coordinate_utils.get_position_stability()
     
     def _project_point_to_pixel(self, point_3d, intrinsics):
-        return self.detection_utils.project_point_to_pixel(point_3d, intrinsics)
+        """Project a 3D point to 2D pixel coordinates."""
+        # Use the color intrinsics for projection (since depth is aligned to color)
+        fx, fy = intrinsics.fx, intrinsics.fy
+        cx, cy = intrinsics.ppx, intrinsics.ppy
+        
+        x, y, z = point_3d
+        if z == 0:
+            return None
+        
+        # Project to image plane
+        u = int((x * fx / z) + cx)
+        v = int((y * fy / z) + cy)
+        
+        # Check if point is within image bounds
+        if 0 <= u < intrinsics.width and 0 <= v < intrinsics.height:
+            return (u, v)
+        return None
     
     
     def _grasp_and_return(self):
@@ -948,7 +961,26 @@ class EnhancedLidarPredictor:
         self.last_movement_time = time.time()
     
     def _find_closest_object(self, detected_objects):
-        return self.detection_utils.find_closest_object(detected_objects)
+        """Find the closest detected object."""
+        if not detected_objects:
+            return None
+        
+        closest_object = None
+        min_distance = float('inf')
+        
+        for obj in detected_objects:
+            position = self._extract_object_position(obj)
+            if position is None:
+                continue
+            
+            # Calculate distance from camera origin
+            distance = np.sqrt(np.sum(np.array(position)**2))
+            
+            if distance < min_distance:
+                min_distance = distance
+                closest_object = obj
+        
+        return closest_object
     
     def _extract_object_position(self, obj):
         """Extract 3D position from object in camera coordinates (returns in meters, same format as obj['center'])."""
@@ -1545,9 +1577,8 @@ class EnhancedLidarPredictor:
     
     def get_robot_pose(self):
         """Get current robot end-effector pose."""
-        if self.enhanced_robot_controller and hasattr(self.enhanced_robot_controller, 'get_current_position'):
-            return self.enhanced_robot_controller.get_current_position()
-        return None
+        # Use robot_utils which already handles the robot connection properly
+        return self.robot_utils.get_robot_pose()
     
     def pose_to_transform_matrix(self, pose):
         """Convert [x, y, z, rx, ry, rz] pose to 4x4 transformation matrix."""
@@ -1704,17 +1735,18 @@ class EnhancedLidarPredictor:
             return self.create_empty_detection_result()
     
     def create_empty_detection_result(self, point_cloud=None, surface_plane=None, full_point_cloud=None):
-        """Create empty detection result with consistent key structure."""
+        """Create empty detection result structure."""
         return {
             'valid_detection': False,
             'objects': [],
             'num_objects': 0,
-            'object_center': None,
-            'confidence': 0.0,
-            'object_points': np.array([]),
+            'object_center': None,  # Legacy compatibility
+            'object_points': [],
             'surface_plane': surface_plane,
             'full_point_cloud': full_point_cloud or point_cloud,
-            'roi_points': np.array([])
+            'roi_points': [],
+            'confidence': 0.0,
+            'num_points': 0
         }
     
     def generate_point_cloud(self, depth_frame, color_frame=None):
@@ -1733,13 +1765,72 @@ class EnhancedLidarPredictor:
         return valid_points
     
     def filter_roi(self, point_cloud):
-        return self.point_cloud_utils.filter_roi(point_cloud, self.roi_bounds)
+        """Filter point cloud to region of interest."""
+        # Apply ROI filtering
+        roi_mask = (
+            (point_cloud[:, 0] >= self.roi_bounds['x_min']) &
+            (point_cloud[:, 0] <= self.roi_bounds['x_max']) &
+            (point_cloud[:, 1] >= self.roi_bounds['y_min']) &
+            (point_cloud[:, 1] <= self.roi_bounds['y_max']) &
+            (point_cloud[:, 2] >= self.roi_bounds['z_min']) &
+            (point_cloud[:, 2] <= self.roi_bounds['z_max'])
+        )
+        
+        return point_cloud[roi_mask]
     
     def detect_surface_plane(self, point_cloud):
-        return self.point_cloud_utils.detect_surface_plane(point_cloud, self.surface_distance_threshold)
+        """Detect surface plane using RANSAC."""
+        if len(point_cloud) < 3:
+            return None
+        
+        # Use only X and Y coordinates to fit a horizontal plane (Z as target)
+        X = point_cloud[:, :2]  # X, Y coordinates
+        y = point_cloud[:, 2]   # Z coordinates
+        
+        # RANSAC plane fitting
+        ransac = RANSACRegressor(
+            residual_threshold=self.surface_distance_threshold,
+            min_samples=3,
+            max_trials=100,
+            random_state=42
+        )
+        
+        try:
+            ransac.fit(X, y)
+            
+            # Get plane coefficients
+            # Plane equation: Z = ax + by + c
+            # Convert to general form: ax + by - z + c = 0
+            a, b = ransac.estimator_.coef_
+            c = ransac.estimator_.intercept_
+            
+            return np.array([a, b, -1.0, c])
+            
+        except Exception as e:
+            print(f"Plane detection failed: {e}")
+            return None
     
     def filter_points_above_surface(self, point_cloud, surface_plane, min_height=0.01, max_height=0.1):
-        return self.point_cloud_utils.filter_points_above_surface(point_cloud, surface_plane, min_height, max_height)
+        """Filter points that are above the detected surface plane."""
+        if surface_plane is None:
+            return np.array([])
+        
+        a, b, c, d = surface_plane
+        
+        # Calculate distance from each point to the plane
+        # Distance = |ax + by + cz + d| / sqrt(a² + b² + c²)
+        norm = np.sqrt(a**2 + b**2 + c**2)
+        distances = np.abs(
+            a * point_cloud[:, 0] + 
+            b * point_cloud[:, 1] + 
+            c * point_cloud[:, 2] + 
+            d
+        ) / norm
+        
+        # Filter points that are above the surface by the specified height range
+        above_surface_mask = (distances >= min_height) & (distances <= max_height)
+        
+        return point_cloud[above_surface_mask]
     
     def find_all_significant_clusters(self, object_points, min_cluster_size=15, max_cluster_size=None):
         """Find all significant clusters in the object points with color assignments and hand filtering."""
@@ -1908,7 +1999,10 @@ class EnhancedLidarPredictor:
                 print("Robot not connected")
         
         elif key == ord('c'):  # Move robot to next preset position
-            print("Move to next preset position not available")
+            if self.robot_utils.move_robot_to_next_pose():
+                print("Robot moved to next preset position")
+            else:
+                print("Failed to move robot to next preset position")
         
         elif key == ord('a'):  # Recalibrate auto ROI (placeholder for future implementation)
             print("Auto ROI recalibration not yet implemented")

@@ -50,7 +50,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cv2 import aruco
 
 # Import utilities and new modular transformer
-from utils import RobotUtils, CameraUtils, DetectionUtils
+from utils_modules import RobotUtils, CameraUtils, DetectionUtils
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from charuco_transformer import CharUcoTransformer
 

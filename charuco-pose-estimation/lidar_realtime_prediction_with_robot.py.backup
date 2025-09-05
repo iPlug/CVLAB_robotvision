@@ -1,15 +1,62 @@
 #!/usr/bin/env python3
+"""
+Enhanced Real-time LiDAR Object Position Prediction with Advanced Robot Integration
 
-import sys, os, cv2, numpy as np, pyrealsense2 as rs, time
+Real-time markerless object detection and position prediction using LiDAR point cloud data
+with comprehensive robot functionality including pointing, grasping, and camera control.
+
+Features:
+- Real-time object position prediction relative to robot base (markerless)
+- Virtual fixed camera mode - robot maintains observation pose for continuous detection
+- On-demand pointing at closest detected object ('p' key)
+- Full grasp sequence with gripper control and drop at specified position ('g' key)  
+- Camera tilt controls for optimal viewing angles ('w'/'s' keys)
+- Advanced robot state management with async operations
+- Surface plane detection for objects on tables/floors
+- Point cloud clustering for robust multi-object detection
+- Live visualization with position display and robot status
+- Robot coordinate system (X=forward, Y=left, Z=up)
+
+Usage:
+    python lidar_realtime_prediction_with_robot.py [options]
+
+Controls:
+    'p' - Point at closest detected object (3 sec, return to observation)
+    'g' - Grasp closest object (hover, open, grasp, lift, drop, close gripper, return)
+    '1' - Grasp Object 1 (specific target)
+    '2' - Grasp Object 2 (specific target)
+    '3' - Grasp Object 3 (specific target)
+    '4-9' - Grasp Objects 4-9 (specific targets)
+    'w' - Tilt camera UP (Joint4 +30°)
+    's' - Tilt camera DOWN (Joint4 -30°) or Stop robot movement
+    'f' - Look forward (horizontal view)  
+    'r' - Return to observation pose
+    'c' - Move robot to next preset position
+    'a' - Recalibrate auto ROI
+    'q' - Quit application
+    ESC - Exit
+"""
+
+import sys
+import os
+import cv2
+import numpy as np
+import pyrealsense2 as rs
 from pathlib import Path
+import time
 from sklearn.linear_model import RANSACRegressor
 from sklearn.cluster import DBSCAN
+
+# Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from utils_modules import RobotUtils, CameraUtils, CoordinateUtils, DetectionUtils, PointCloudUtils, VisualizationUtils
+
+# Import utilities and robot controller
+from utils import RobotUtils, CameraUtils, CoordinateUtils, DetectionUtils
 from module.robot.mycobot_controller import MyCobotController
 
 
 class EnhancedLidarPredictor:
+    """Enhanced real-time LiDAR-based markerless object position prediction system with advanced robot integration."""
     
     def __init__(self, config_path="charuco-pose-estimation", prediction_offset=None):
         """Initialize the enhanced real-time LiDAR object detection system.
@@ -35,8 +82,7 @@ class EnhancedLidarPredictor:
         self.surface_distance_threshold = 0.01  # 1cm threshold for surface plane detection
         self.object_height_threshold = 0.005    # 5mm minimum object height above surface
         self.clustering_eps = 0.02               # 2cm clustering tolerance
-        self.clustering_min_samples = 100         # Minimum points for object cluster
-        self.clustering_max_samples = 5000        # Maximum points for object cluster (filter hands)
+        self.clustering_min_samples = 10         # Minimum points for object cluster
         
         # KNN detection parameters (simplified approach)
         self.knn_radius = 0.05                   # 5cm radius for KNN search
@@ -58,8 +104,6 @@ class EnhancedLidarPredictor:
         self.camera_utils = CameraUtils(config_path)
         self.coordinate_utils = CoordinateUtils()
         self.detection_utils = DetectionUtils(config_path)
-        self.point_cloud_utils = PointCloudUtils()
-        self.visualization_utils = VisualizationUtils()
         
         # Enhanced robot controller setup - reuse the robot from robot_utils to avoid COM port conflicts
         self.enhanced_robot_controller = None
@@ -93,8 +137,10 @@ class EnhancedLidarPredictor:
         
         # Enhanced robot state tracking
         self.robot_in_observation_pose = False
+        self.pointing_in_progress = False
         self.grasping_in_progress = False
         self.returning_to_observer = False
+        self.pointing_start_time = 0
         self.return_start_time = 0
         
         # Non-blocking grasping state machine
@@ -106,7 +152,8 @@ class EnhancedLidarPredictor:
         # Drop position configuration (X, Y, Z, RX, RY, RZ)
         self.drop_position = [40, -200, 150, -180, 0, -135]
         
-        # Timing parameters  
+        # Timing parameters
+        self.pointing_duration = 20.0  # 20 seconds for complete grasping sequence
         self.stabilization_time = 3.0
         
         # Movement speed parameters
@@ -134,12 +181,13 @@ class EnhancedLidarPredictor:
         self.movement_cooldown = 0.1  # Minimum time between movements
         
         # Detection state for robot actions
-        self.last_detection_objects = []  # Store for grasping
+        self.last_detection_objects = []  # Store for pointing/grasping
         self.last_detection_results = {}  # Store complete detection results for UI during robot actions
         
         # Performance monitoring
         self.performance_stats = {
             'total_detections': 0,
+            'pointing_commands': 0,
             'grasping_commands': 0,
             'detection_times': [],
             'avg_fps': 0.0
@@ -150,58 +198,55 @@ class EnhancedLidarPredictor:
         if self.enhanced_robot_controller:
             # Check if it has is_connected attribute
             if hasattr(self.enhanced_robot_controller, 'is_connected'):
-                is_connected = self.enhanced_robot_controller.is_connected
-                if not is_connected:
-                    print(f"Debug: Robot controller exists but is_connected = {is_connected}")
-                return is_connected
+                return self.enhanced_robot_controller.is_connected
             else:
                 # Fallback: assume available if we have the controller
-                print("Debug: Robot controller exists but no is_connected attribute - assuming available")
                 return True
-        else:
-            print("Debug: No enhanced_robot_controller available")
         return False
     
     def _initialize_enhanced_robot_controller(self):
-        """Initialize enhanced robot controller."""
+        """Initialize enhanced robot controller using existing robot connection from robot_utils."""
         try:
-            # Use robot controller from robot_utils if available, otherwise create new one
-            if hasattr(self.robot_utils, 'robot') and self.robot_utils.robot is not None:
-                self.enhanced_robot_controller = self.robot_utils.robot
-                print("✓ Using existing robot controller from robot_utils")
-            else:
-                # Initialize robot controller directly as fallback
-                self.enhanced_robot_controller = MyCobotController()
-                print("✓ Created new robot controller")
-            
-            # Try to enable async mode if available
-            if hasattr(self.enhanced_robot_controller, 'enable_async_mode'):
-                if self.enhanced_robot_controller.enable_async_mode(max_queue_size=5):
-                    print("✓ Robot async mode enabled for smooth visualization")
-                else:
-                    print("! Async mode not available - using synchronous commands")
-            else:
-                print("! Async mode not supported by this robot controller")
-                
-            # Try to capture base joint angles for camera tilt control
-            try:
-                if hasattr(self.enhanced_robot_controller, 'get_joint_angles'):
-                    self.base_joint_angles = self.enhanced_robot_controller.get_joint_angles()
-                    if self.base_joint_angles and len(self.base_joint_angles) >= 6:
-                        print(f"✓ Base joint angles captured: {[f'{x:.1f}' for x in self.base_joint_angles]}")
-                        print("✓ Camera tilt controls (w/s keys) enabled")
-                        self.robot_in_observation_pose = True
+            # Use the existing robot connection from robot_utils to avoid COM port conflicts
+            if self.robot_utils.robot and hasattr(self.robot_utils.robot, 'is_connected'):
+                if self.robot_utils.robot.is_connected:
+                    print("✓ Using existing robot connection from robot_utils")
+                    self.enhanced_robot_controller = self.robot_utils.robot
+                    
+                    # Try to enable async mode if available
+                    if hasattr(self.enhanced_robot_controller, 'enable_async_mode'):
+                        if self.enhanced_robot_controller.enable_async_mode(max_queue_size=5):
+                            print("✓ Robot async mode enabled for smooth visualization")
+                        else:
+                            print("! Async mode not available - using synchronous commands")
                     else:
-                        print("! Could not capture base joint angles - camera tilt controls disabled")
+                        print("! Async mode not supported by this robot controller")
+                    
+                    # Try to capture base joint angles for camera tilt control
+                    try:
+                        if hasattr(self.enhanced_robot_controller, 'get_joint_angles'):
+                            self.base_joint_angles = self.enhanced_robot_controller.get_joint_angles()
+                            if self.base_joint_angles and len(self.base_joint_angles) >= 6:
+                                print(f"✓ Base joint angles captured: {[f'{x:.1f}' for x in self.base_joint_angles]}")
+                                print("✓ Camera tilt controls (w/s keys) enabled")
+                                self.robot_in_observation_pose = True
+                            else:
+                                print("! Could not capture base joint angles - camera tilt controls disabled")
+                                self.base_joint_angles = None
+                        else:
+                            print("! get_joint_angles not available - camera tilt controls disabled")
+                            self.base_joint_angles = None
+                    except Exception as e:
+                        print(f"! Failed to capture base joint angles: {e}")
                         self.base_joint_angles = None
+                        
+                    print("✓ Enhanced robot functionality initialized with existing connection")
                 else:
-                    print("! get_joint_angles not available - camera tilt controls disabled")
-                    self.base_joint_angles = None
-            except Exception as e:
-                print(f"! Failed to capture base joint angles: {e}")
-                self.base_joint_angles = None
-                
-            print("✓ Enhanced robot functionality initialized with existing connection")
+                    print("! Robot connection exists but not connected - enhanced features disabled")
+                    self.enhanced_robot_controller = None
+            else:
+                print("! No robot connection available from robot_utils - enhanced features disabled")
+                self.enhanced_robot_controller = None
                 
         except Exception as e:
             print(f"! Error setting up enhanced robot functionality: {e}")
@@ -245,8 +290,107 @@ class EnhancedLidarPredictor:
         return self.coordinate_utils.get_position_stability()
     
     def _project_point_to_pixel(self, point_3d, intrinsics):
-        return self.detection_utils.project_point_to_pixel(point_3d, intrinsics)
+        """Project a 3D point to 2D pixel coordinates."""
+        # Use the color intrinsics for projection (since depth is aligned to color)
+        fx, fy = intrinsics.fx, intrinsics.fy
+        cx, cy = intrinsics.ppx, intrinsics.ppy
+        
+        x, y, z = point_3d
+        if z == 0:
+            return None
+        
+        # Project to image plane
+        u = int((x * fx / z) + cx)
+        v = int((y * fy / z) + cy)
+        
+        # Check if point is within image bounds
+        if 0 <= u < intrinsics.width and 0 <= v < intrinsics.height:
+            return (u, v)
+        return None
     
+    def _point_and_return(self):
+        """Start pointing at closest detected object (non-blocking)."""
+        if not self._is_robot_available():
+            print("Robot not connected - cannot point at object")
+            return
+        
+        if self.pointing_in_progress or self.grasping_in_progress:
+            print("Robot action already in progress")
+            return
+        
+        if not self.last_detection_objects:
+            print("No objects detected - cannot point")
+            return
+        
+        # Find closest object
+        closest_object = self._find_closest_object(self.last_detection_objects)
+        if closest_object is None:
+            print("No valid target object found")
+            return
+        
+        # Extract position (use center directly, same as main loop visualization)
+        camera_position_m = self._extract_object_position(closest_object)
+
+        if camera_position_m is None:
+            print("Could not extract object position")
+            return
+        
+        # Convert to mm for display
+        camera_position_mm = [pos * 1000 for pos in camera_position_m]
+        
+        print(f"\n{'='*60}")
+        print(f"POINTING ACTION - {time.strftime('%H:%M:%S')}")
+        print(f"Target: ({camera_position_mm[0]:.1f}, {camera_position_mm[1]:.1f}, {camera_position_mm[2]:.1f}) mm")
+        print(f"{'='*60}")
+        
+        # Start non-blocking pointing sequence
+        self.pointing_in_progress = True
+        self.pointing_start_time = time.time()
+        
+        try:
+            # Try async pointing if available
+            if hasattr(self.enhanced_robot_controller, 'point_at_object_async'):
+                # Async pointing command
+                print("1. Pointing at object...")
+                command_id = self.enhanced_robot_controller.point_at_object_async(
+                    camera_position_m,  # Use meters as expected by the robot controller
+                    priority=2,
+                    timeout=15.0
+                )
+                
+                if command_id:
+                    print(f"[OK] Pointing command submitted (ID: {command_id})")
+                    print("   RGB feed continues during pointing...")
+                    self.performance_stats['pointing_commands'] += 1
+                else:
+                    print("[ERROR] Failed to submit pointing command - trying sync")
+                    # Fallback to sync pointing
+                    success = self.enhanced_robot_controller.point_at_object(camera_position_m)
+                    if success:
+                        print("[OK] Robot pointing at object (sync)")
+                        self.performance_stats['pointing_commands'] += 1
+                    else:
+                        print("[ERROR] Failed to point at object")
+                        self.pointing_in_progress = False
+            elif hasattr(self.enhanced_robot_controller, 'point_at_object'):
+                # Synchronous pointing command
+                print("1. Pointing at object...")
+                success = self.enhanced_robot_controller.point_at_object(camera_position_m)
+                
+                if success:
+                    print("[OK] Robot pointing at object (sync)")
+                    print("   RGB feed continues during pointing...")
+                    self.performance_stats['pointing_commands'] += 1
+                else:
+                    print("[ERROR] Failed to point at object")
+                    self.pointing_in_progress = False
+            else:
+                print("[ERROR] No pointing method available on robot controller")
+                self.pointing_in_progress = False
+        
+        except Exception as e:
+            print(f"Error during pointing sequence: {e}")
+            self.pointing_in_progress = False
     
     def _grasp_and_return(self):
         """Start non-blocking grasping sequence (state machine approach)."""
@@ -254,12 +398,14 @@ class EnhancedLidarPredictor:
             print("Robot not connected - cannot grasp object")
             return
         
-        if self.grasping_in_progress:
+        if self.pointing_in_progress or self.grasping_in_progress:
             print("Robot action already in progress")
             return
         
         # Print all detected object centers before grasping
+        print(f"\n{'='*60}")
         print(f"GRASPING ACTION - {time.strftime('%H:%M:%S')}")
+        print(f"{'='*60}")
         
         if not self.last_detection_objects:
             print("No objects detected for grasping")
@@ -333,6 +479,9 @@ class EnhancedLidarPredictor:
         
         print(f"\n→ TARGETING Object {target_index} (closest to camera):")
         print(f"  Position: ({display_position_mm[0]:6.1f}, {display_position_mm[1]:6.1f}, {display_position_mm[2]:6.1f}) mm [{coord_label}]")
+        print(f"  Size: {closest_object.get('size', 0)} points")
+        print(f"  Confidence: {closest_object.get('confidence', 0.0):.2f}")
+        print(f"{'='*60}")
         
         # Initialize non-blocking grasping state machine
         self.grasping_in_progress = True
@@ -344,6 +493,7 @@ class EnhancedLidarPredictor:
             'closest_object': closest_object
         }
         self.grasping_step_start_time = time.time()
+        self.pointing_start_time = time.time()  # For consistency with pointing timeout
         
         print("\n✓ Grasping sequence started - RGB feed will continue updating")
         if target_index > 0:
@@ -357,7 +507,7 @@ class EnhancedLidarPredictor:
             print("Robot not connected - cannot grasp object")
             return
         
-        if self.grasping_in_progress:
+        if self.pointing_in_progress or self.grasping_in_progress:
             print("Robot action already in progress")
             return
         
@@ -379,7 +529,9 @@ class EnhancedLidarPredictor:
             return
         
         # Print all detected object centers before grasping
+        print(f"\n{'='*60}")
         print(f"GRASPING SPECIFIC OBJECT {object_id} - {time.strftime('%H:%M:%S')}")
+        print(f"{'='*60}")
         
         # Get current robot pose for coordinate transformation
         try:
@@ -422,6 +574,9 @@ class EnhancedLidarPredictor:
         
         print(f"\n→ TARGETING Object {object_id} (user selected):")
         print(f"  Position: ({display_position_mm[0]:6.1f}, {display_position_mm[1]:6.1f}, {display_position_mm[2]:6.1f}) mm [{coord_label}]")
+        print(f"  Size: {target_object.get('size', 0)} points")
+        print(f"  Confidence: {target_object.get('confidence', 0.0):.2f}")
+        print(f"{'='*60}")
         
         # Initialize non-blocking grasping state machine
         self.grasping_in_progress = True
@@ -434,6 +589,7 @@ class EnhancedLidarPredictor:
             'robot_position_mm': display_position_mm if coord_label == "robot" else None
         }
         self.grasping_step_start_time = time.time()
+        self.pointing_start_time = time.time()
         
         print(f"\n✓ Grasping sequence started for Object {object_id}")
         print(f"  Target object: Object {object_id} at ({display_position_mm[0]:.1f}, {display_position_mm[1]:.1f}, {display_position_mm[2]:.1f}) mm [{coord_label}]")
@@ -809,12 +965,17 @@ class EnhancedLidarPredictor:
         self.grasping_step_start_time = None
         
         if success:
-            print("GRASPING COMPLETED")
+            print(f"{'='*60}")
+            print("GRASPING COMPLETED SUCCESSFULLY")
+            print(f"{'='*60}")
             self.performance_stats['grasping_commands'] += 1
         else:
-            print("GRASPING FAILED")
+            print(f"{'='*60}")
+            print("GRASPING FAILED - SEQUENCE ABORTED")
+            print(f"{'='*60}")
             
     def _perform_sync_grasping_sequence(self, camera_position_m):
+        """Perform synchronous grasping sequence that doesn't block RGB feed."""
         try:
             # Transform camera coordinates to robot coordinates using the eye-in-hand calibration
             robot_pose = self.get_robot_pose()
@@ -948,7 +1109,26 @@ class EnhancedLidarPredictor:
         self.last_movement_time = time.time()
     
     def _find_closest_object(self, detected_objects):
-        return self.detection_utils.find_closest_object(detected_objects)
+        """Find the closest detected object."""
+        if not detected_objects:
+            return None
+        
+        closest_object = None
+        min_distance = float('inf')
+        
+        for obj in detected_objects:
+            position = self._extract_object_position(obj)
+            if position is None:
+                continue
+            
+            # Calculate distance from camera origin
+            distance = np.sqrt(np.sum(np.array(position)**2))
+            
+            if distance < min_distance:
+                min_distance = distance
+                closest_object = obj
+        
+        return closest_object
     
     def _extract_object_position(self, obj):
         """Extract 3D position from object in camera coordinates (returns in meters, same format as obj['center'])."""
@@ -967,6 +1147,25 @@ class EnhancedLidarPredictor:
             print(f"Error extracting object position: {e}")
             return None
     
+    def _check_pointing_timeout(self):
+        """Check if pointing duration has elapsed and start return to observation pose."""
+        if self.pointing_in_progress or self.grasping_in_progress:
+            elapsed_time = time.time() - self.pointing_start_time
+            if elapsed_time >= self.pointing_duration:
+                action_type = "Grasping" if self.grasping_in_progress else "Pointing"
+                print(f"2. {action_type} duration ({self.pointing_duration}s) elapsed, returning to observation pose...")
+                
+                if self.enhanced_robot_controller:
+                    from module.utils.robot_utils import move_to_standard_pose
+                    move_to_standard_pose(self.enhanced_robot_controller, "table", async_mode=True)
+                
+                # Start return-to-observer sequence
+                self.pointing_in_progress = False
+                self.grasping_in_progress = False
+                self.returning_to_observer = True
+                self.return_start_time = time.time()
+                self.robot_in_observation_pose = False  # Robot is moving, not yet stable
+                print("[OK] Return to observer pose initiated, waiting for stabilization...")
     
     def _check_return_stabilization(self):
         """Check if robot has stabilized after returning to observer pose."""
@@ -1185,6 +1384,9 @@ class EnhancedLidarPredictor:
             if self.grasping_in_progress:
                 robot_status = "GRASPING OBJECT"
                 status_color = (0, 165, 255)  # Orange
+            elif self.pointing_in_progress:
+                robot_status = "POINTING AT OBJECT"
+                status_color = (0, 255, 255)  # Yellow
             elif self.returning_to_observer:
                 robot_status = "RETURNING TO POSE"
                 status_color = (255, 255, 0)  # Cyan
@@ -1202,13 +1404,16 @@ class EnhancedLidarPredictor:
                        cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 0), 1)
         
         # Controls info with enhanced controls
-        cv2.putText(image, "Controls: 'g'=Grasp, 'w'/'s'=Tilt, 'f'=Forward, 'r'=Return, 'q'=Quit", 
+        cv2.putText(image, "Controls: 'p'=Point, 'g'=Grasp, 'w'/'s'=Tilt, 'f'=Forward, 'r'=Return, 'q'=Quit", 
                    (10, h - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 255, 255), 1)
         
         # Add prominent mode indicators for robot actions
         if self.grasping_in_progress:
             cv2.putText(image, "*** GRASPING MODE - RGB LIVE, 3D PAUSED ***", 
                        (10, h - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+        elif self.pointing_in_progress:
+            cv2.putText(image, "*** POINTING MODE - RGB LIVE, 3D PAUSED ***", 
+                       (10, h - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
         elif self.returning_to_observer:
             cv2.putText(image, "*** RETURNING TO POSE - RGB LIVE ***", 
                        (10, h - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
@@ -1545,9 +1750,8 @@ class EnhancedLidarPredictor:
     
     def get_robot_pose(self):
         """Get current robot end-effector pose."""
-        if self.enhanced_robot_controller and hasattr(self.enhanced_robot_controller, 'get_current_position'):
-            return self.enhanced_robot_controller.get_current_position()
-        return None
+        # Use robot_utils which already handles the robot connection properly
+        return self.robot_utils.get_robot_pose()
     
     def pose_to_transform_matrix(self, pose):
         """Convert [x, y, z, rx, ry, rz] pose to 4x4 transformation matrix."""
@@ -1694,27 +1898,44 @@ class EnhancedLidarPredictor:
             # Skip detection during robot grasping to avoid interference  
             if self.grasping_in_progress:
                 return self.create_empty_detection_result()
-            # Use surface-based detection only (more robust and consistent)
+            # Try surface-based detection first (more robust)
             results = self.detect_object_on_surface(color_frame, depth_frame)
             
-            return results
+            if results['valid_detection']:
+                return results
+            
+            # Fallback to KNN-based detection if surface detection fails
+            print("Surface detection failed, trying KNN approach...")
+            point_cloud = results.get('full_point_cloud')
+            
+            if point_cloud is not None and self.camera_utils.color_intrinsics is not None:
+                knn_results = self.detect_object_knn_simple(
+                    point_cloud, 
+                    self.camera_utils.color_intrinsics,
+                    self.knn_radius,
+                    self.knn_min_neighbors
+                )
+                return knn_results
+            
+            return self.create_empty_detection_result()
             
         except Exception as e:
             print(f"Detection error: {e}")
             return self.create_empty_detection_result()
     
     def create_empty_detection_result(self, point_cloud=None, surface_plane=None, full_point_cloud=None):
-        """Create empty detection result with consistent key structure."""
+        """Create empty detection result structure."""
         return {
             'valid_detection': False,
             'objects': [],
             'num_objects': 0,
-            'object_center': None,
-            'confidence': 0.0,
-            'object_points': np.array([]),
+            'object_center': None,  # Legacy compatibility
+            'object_points': [],
             'surface_plane': surface_plane,
             'full_point_cloud': full_point_cloud or point_cloud,
-            'roi_points': np.array([])
+            'roi_points': [],
+            'confidence': 0.0,
+            'num_points': 0
         }
     
     def generate_point_cloud(self, depth_frame, color_frame=None):
@@ -1733,22 +1954,77 @@ class EnhancedLidarPredictor:
         return valid_points
     
     def filter_roi(self, point_cloud):
-        return self.point_cloud_utils.filter_roi(point_cloud, self.roi_bounds)
+        """Filter point cloud to region of interest."""
+        # Apply ROI filtering
+        roi_mask = (
+            (point_cloud[:, 0] >= self.roi_bounds['x_min']) &
+            (point_cloud[:, 0] <= self.roi_bounds['x_max']) &
+            (point_cloud[:, 1] >= self.roi_bounds['y_min']) &
+            (point_cloud[:, 1] <= self.roi_bounds['y_max']) &
+            (point_cloud[:, 2] >= self.roi_bounds['z_min']) &
+            (point_cloud[:, 2] <= self.roi_bounds['z_max'])
+        )
+        
+        return point_cloud[roi_mask]
     
     def detect_surface_plane(self, point_cloud):
-        return self.point_cloud_utils.detect_surface_plane(point_cloud, self.surface_distance_threshold)
+        """Detect surface plane using RANSAC."""
+        if len(point_cloud) < 3:
+            return None
+        
+        # Use only X and Y coordinates to fit a horizontal plane (Z as target)
+        X = point_cloud[:, :2]  # X, Y coordinates
+        y = point_cloud[:, 2]   # Z coordinates
+        
+        # RANSAC plane fitting
+        ransac = RANSACRegressor(
+            residual_threshold=self.surface_distance_threshold,
+            min_samples=3,
+            max_trials=100,
+            random_state=42
+        )
+        
+        try:
+            ransac.fit(X, y)
+            
+            # Get plane coefficients
+            # Plane equation: Z = ax + by + c
+            # Convert to general form: ax + by - z + c = 0
+            a, b = ransac.estimator_.coef_
+            c = ransac.estimator_.intercept_
+            
+            return np.array([a, b, -1.0, c])
+            
+        except Exception as e:
+            print(f"Plane detection failed: {e}")
+            return None
     
     def filter_points_above_surface(self, point_cloud, surface_plane, min_height=0.01, max_height=0.1):
-        return self.point_cloud_utils.filter_points_above_surface(point_cloud, surface_plane, min_height, max_height)
+        """Filter points that are above the detected surface plane."""
+        if surface_plane is None:
+            return np.array([])
+        
+        a, b, c, d = surface_plane
+        
+        # Calculate distance from each point to the plane
+        # Distance = |ax + by + cz + d| / sqrt(a² + b² + c²)
+        norm = np.sqrt(a**2 + b**2 + c**2)
+        distances = np.abs(
+            a * point_cloud[:, 0] + 
+            b * point_cloud[:, 1] + 
+            c * point_cloud[:, 2] + 
+            d
+        ) / norm
+        
+        # Filter points that are above the surface by the specified height range
+        above_surface_mask = (distances >= min_height) & (distances <= max_height)
+        
+        return point_cloud[above_surface_mask]
     
-    def find_all_significant_clusters(self, object_points, min_cluster_size=15, max_cluster_size=None):
-        """Find all significant clusters in the object points with color assignments and hand filtering."""
+    def find_all_significant_clusters(self, object_points, min_cluster_size=15):
+        """Find all significant clusters in the object points with color assignments."""
         if len(object_points) < self.clustering_min_samples:
             return []
-        
-        # Use instance parameter if not provided
-        if max_cluster_size is None:
-            max_cluster_size = self.clustering_max_samples
         
         # Define color palette for different clusters
         color_palette = [
@@ -1782,8 +2058,8 @@ class EnhancedLidarPredictor:
             cluster_points = object_points[cluster_mask]
             cluster_size = len(cluster_points)
             
-            # Only include clusters within size range (exclude hands and tiny noise)
-            if min_cluster_size <= cluster_size <= max_cluster_size:
+            # Only include clusters above minimum size
+            if cluster_size >= min_cluster_size:
                 # Calculate cluster center
                 cluster_center = np.mean(cluster_points, axis=0)
                 
@@ -1805,8 +2081,6 @@ class EnhancedLidarPredictor:
                 })
                 
                 cluster_id += 1
-            elif cluster_size > max_cluster_size:
-                print(f"Filtered out large cluster: {cluster_size} points (likely hand or background)")
         
         # Sort clusters by size (largest first)
         clusters.sort(key=lambda x: x['size'], reverse=True)
@@ -1823,8 +2097,14 @@ class EnhancedLidarPredictor:
             return False
         
         # Enhanced robot controls
+        elif key == ord('p'):  # Point at closest object
+            if not (self.pointing_in_progress or self.grasping_in_progress):
+                self._point_and_return()
+            else:
+                print("Robot action already in progress")
+        
         elif key == ord('g'):  # Grasp closest object
-            if not self.grasping_in_progress:
+            if not (self.pointing_in_progress or self.grasping_in_progress):
                 self._grasp_and_return()
             else:
                 print("Robot action already in progress")
@@ -1832,7 +2112,7 @@ class EnhancedLidarPredictor:
         # Number keys for specific object grasping
         elif key in [ord('1'), ord('2'), ord('3'), ord('4'), ord('5'), ord('6'), ord('7'), ord('8'), ord('9')]:
             object_id = int(chr(key))  # Convert key to object ID (1-9)
-            if not self.grasping_in_progress:
+            if not (self.pointing_in_progress or self.grasping_in_progress):
                 self._grasp_specific_object(object_id)
             else:
                 print("Robot action already in progress")
@@ -1845,13 +2125,14 @@ class EnhancedLidarPredictor:
                 print("Camera tilt not available (no base joint angles)" if not self.base_joint_angles else "Movement cooling down...")
         
         elif key == ord('s'):  # Camera DOWN (joint4 -30°) or STOP robot
-            if self.grasping_in_progress:
+            if self.pointing_in_progress or self.grasping_in_progress:
                 print("Stopping robot movement...")
                 # Implement emergency stop if available
                 if self._is_robot_available():
                     try:
                         if hasattr(self.enhanced_robot_controller, 'stop_movement'):
                             self.enhanced_robot_controller.stop_movement()
+                        self.pointing_in_progress = False
                         self.grasping_in_progress = False
                         print("Robot movement stopped")
                     except Exception as e:
@@ -1908,7 +2189,10 @@ class EnhancedLidarPredictor:
                 print("Robot not connected")
         
         elif key == ord('c'):  # Move robot to next preset position
-            print("Move to next preset position not available")
+            if self.robot_utils.move_robot_to_next_pose():
+                print("Robot moved to next preset position")
+            else:
+                print("Failed to move robot to next preset position")
         
         elif key == ord('a'):  # Recalibrate auto ROI (placeholder for future implementation)
             print("Auto ROI recalibration not yet implemented")
@@ -1919,11 +2203,22 @@ class EnhancedLidarPredictor:
         return True  # Continue main loop
     
     def update_robot_state_tracking(self):
+        """Update robot state tracking for timeouts and transitions."""
+        # Check for pointing timeout
+        self._check_pointing_timeout()
+        
         # Check for return stabilization completion
         self._check_return_stabilization()
     
     def run(self):
-        print("Starting LiDAR Real-time Prediction System...")
+        """Enhanced main application loop with robot functionality."""
+        print("Starting Enhanced LiDAR Real-time Prediction System...")
+        print("Enhanced Features:")
+        print("  • Real-time markerless object detection and clustering")
+        print("  • Advanced robot integration with pointing and grasping")
+        print("  • Camera tilt controls for optimal viewing angles")
+        print("  • Async robot operations - visualization never blocks")
+        print("  • Multi-object detection with color-coded visualization")
         
         # Setup camera
         if not self.setup_camera():
@@ -1957,7 +2252,7 @@ class EnhancedLidarPredictor:
                 color_image = np.asanyarray(color_frame.get_data())
                 
                 # Skip depth processing during robot actions for better performance
-                if self.grasping_in_progress or self.returning_to_observer:
+                if self.pointing_in_progress or self.grasping_in_progress or self.returning_to_observer:
                     depth_frame = None  # No depth processing needed during robot actions
                     # During robot actions: use last detection results to maintain UI but keep RGB updating
                     detection_results = self.create_empty_detection_result()
@@ -2010,7 +2305,7 @@ class EnhancedLidarPredictor:
                             self.update_position_history(main_position_in_base)
                             
                             # Print positions for ALL objects periodically (skip during robot actions)
-                            if not (self.grasping_in_progress or self.returning_to_observer):
+                            if not (self.grasping_in_progress or self.pointing_in_progress or self.returning_to_observer):
                                 self.position_print_counter += 1
                                 if self.position_print_counter % 30 == 0:  # Every 30 frames (~1 second)
                                     mean_pos, std_pos = self.get_position_stability()
@@ -2106,7 +2401,8 @@ class EnhancedLidarPredictor:
             print("Robot controller not available or doesn't support safety validation control")
     
     def cleanup(self):
-        print("Cleaning up...")
+        """Enhanced cleanup with robot return to safe position."""
+        print("Cleaning up Enhanced LiDAR Prediction System...")
         
         # Return robot to observation pose if connected
         if self._is_robot_available():
@@ -2131,6 +2427,7 @@ class EnhancedLidarPredictor:
         # Print performance summary
         print("\nPerformance Summary:")
         print(f"  Total detections: {self.performance_stats['total_detections']}")
+        print(f"  Pointing commands: {self.performance_stats['pointing_commands']}")
         print(f"  Grasping commands: {self.performance_stats['grasping_commands']}")
         print(f"  Average FPS: {self.performance_stats['avg_fps']:.1f}")
         
@@ -2138,10 +2435,11 @@ class EnhancedLidarPredictor:
             avg_detection_time = np.mean(self.performance_stats['detection_times'])
             print(f"  Average detection time: {avg_detection_time*1000:.1f}ms")
         
-        print("Shutdown complete.")
+        print("Enhanced LiDAR Prediction System shutdown complete.")
 
 
 def main():
+    """Main function to run the Enhanced LiDAR Real-time Prediction System."""
     import argparse
     
     parser = argparse.ArgumentParser(
@@ -2219,10 +2517,20 @@ def main():
         print("    Use EXTREME CAUTION - manual oversight required")
         predictor.set_safety_validation(enabled=False)
     
-    safety_status = "ENABLED" if args.enable_safety else "DISABLED"
+    print("\n=== Enhanced LiDAR Real-time Prediction System with Robot Integration ===")
+    safety_status = "ENABLED ✅" if args.enable_safety else "DISABLED ⚠️ (Default)"
     print(f"Safety Control: {safety_status}")
+    if args.enable_safety:
+        print("  - Safety validation enabled - robot movements will be constrained by safety limits")
+        print("  - To disable safety checks, remove --enable-safety flag")
+    else:
+        print("  - Safety validation disabled by default for maximum grasping flexibility")
+        print("  - Robot will move to exact calculated positions without constraints")
+        print("  - To enable safety checks, use --enable-safety flag")
+        print("  - Monitor robot movements carefully to prevent collisions")
     print("\nGrasping Controls:")
     print("  - 'g' key: Start non-blocking grasping sequence")
+    print("  - 'p' key: Point at closest detected object")
     print("  - 's' key: Emergency stop (during robot actions)")
     print("\nStarting system...\n")
     
